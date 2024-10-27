@@ -8,4 +8,18 @@ public partial class App : Application
 
         MainPage = new AppShell();
     }
+    
+    protected override async void OnStart()
+    {
+        var pin = await SecureStorage.GetAsync("user_pin");
+        
+        if (!string.IsNullOrEmpty(pin))
+        {
+            await Shell.Current.GoToAsync("//PinEntryPage");
+        }
+        else
+        {
+            await Shell.Current.GoToAsync("//SetPinPage");
+        }
+    }
 }
