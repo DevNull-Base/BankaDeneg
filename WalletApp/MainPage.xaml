@@ -11,13 +11,13 @@
             <!--Верхняя панель-->
             <Grid ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Иконка -->
-                <Frame Style="{StaticResource Avatar}"
+                <Frame BackgroundColor="Aqua" Style="{StaticResource Avatar}"
                        WidthRequest="40" HeightRequest="40">
                     <Image Source="cat.png"
                            WidthRequest="40" HeightRequest="40"
