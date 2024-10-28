@@ -5,44 +5,64 @@
              x:Class="WalletApp.Views.PinEntryPage">
     <ContentPage.Content>
 
-        <StackLayout Padding="20" Spacing="15">
-            <Label Text="Введите ваш PIN-код" FontSize="Medium" HorizontalOptions="Center" />
+        <Grid>
+            <!-- Фоновое изображение -->
+            <Image Source="background.png"
+                   Aspect="AspectFill"
+                   Opacity="0.75" />
+
+            <StackLayout Padding="20" Spacing="15" VerticalOptions="End" Margin="0,30,0,0">
+                <Label Text="{Binding ErrorMessage}" HorizontalTextAlignment="Center" TextColor="Red"
+                       IsVisible="{Binding HasError}" />
+                <Label Text="Введите ваш PIN-код" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="Center" />
+
+                <Label Text="{Binding Pin}" FontSize="32" HorizontalOptions="Center" />
+
+                <Grid Padding="20" RowSpacing="10" ColumnSpacing="10" HorizontalOptions="Center">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Style="{StaticResource Pin}" Grid.Row="0" Grid.Column="0" Text="1"
+                            Command="{Binding AddDigitCommand}" CommandParameter="1" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="0" Grid.Column="1" Text="2"
+                            Command="{Binding AddDigitCommand}" CommandParameter="2" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="0" Grid.Column="2" Text="3"
+                            Command="{Binding AddDigitCommand}" CommandParameter="3" />
+
+                    <Button Style="{StaticResource Pin}" Grid.Row="1" Grid.Column="0" Text="4"
+                            Command="{Binding AddDigitCommand}" CommandParameter="4" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="1" Grid.Column="1" Text="5"
+                            Command="{Binding AddDigitCommand}" CommandParameter="5" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="1" Grid.Column="2" Text="6"
+                            Command="{Binding AddDigitCommand}" CommandParameter="6" />
+
+                    <Button Style="{StaticResource Pin}" Grid.Row="2" Grid.Column="0" Text="7"
+                            Command="{Binding AddDigitCommand}" CommandParameter="7" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="2" Grid.Column="1" Text="8"
+                            Command="{Binding AddDigitCommand}" CommandParameter="8" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="2" Grid.Column="2" Text="9"
+                            Command="{Binding AddDigitCommand}" CommandParameter="9" />
+
+                    <Button Style="{StaticResource Pin}" Grid.Row="3" Grid.Column="1" Text="0"
+                            Command="{Binding AddDigitCommand}" CommandParameter="0" />
+                </Grid>
+
+                <Rectangle WidthRequest="100" HeightRequest="80"></Rectangle>
+
+            </StackLayout>
+        </Grid>
 
 
-            <Label Text="{Binding Pin}" FontSize="Large" HorizontalOptions="Center" />
-
-            <Grid Padding="20" RowSpacing="10" ColumnSpacing="10">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Button Grid.Row="0" Grid.Column="0" Text="1" Command="{Binding AddDigitCommand}" CommandParameter="1" />
-                <Button Grid.Row="0" Grid.Column="1" Text="2" Command="{Binding AddDigitCommand}" CommandParameter="2" />
-                <Button Grid.Row="0" Grid.Column="2" Text="3" Command="{Binding AddDigitCommand}" CommandParameter="3" />
-
-                <Button Grid.Row="1" Grid.Column="0" Text="4" Command="{Binding AddDigitCommand}" CommandParameter="4" />
-                <Button Grid.Row="1" Grid.Column="1" Text="5" Command="{Binding AddDigitCommand}" CommandParameter="5" />
-                <Button Grid.Row="1" Grid.Column="2" Text="6" Command="{Binding AddDigitCommand}" CommandParameter="6" />
-
-                <Button Grid.Row="2" Grid.Column="0" Text="7" Command="{Binding AddDigitCommand}" CommandParameter="7" />
-                <Button Grid.Row="2" Grid.Column="1" Text="8" Command="{Binding AddDigitCommand}" CommandParameter="8" />
-                <Button Grid.Row="2" Grid.Column="2" Text="9" Command="{Binding AddDigitCommand}" CommandParameter="9" />
-
-                <Button Grid.Row="3" Grid.Column="1" Text="0" Command="{Binding AddDigitCommand}" CommandParameter="0" />
-            </Grid>
-
-            <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding HasError}" />
-        </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>

@@ -1,11 +1,13 @@
-﻿namespace WalletApp;
+﻿using CommunityToolkit.Maui.Behaviors;
+using CommunityToolkit.Maui.Core;
+
+namespace WalletApp;
 
 public partial class App : Application
 {
     public App()
     {
         InitializeComponent();
-
         MainPage = new AppShell();
     }
     
