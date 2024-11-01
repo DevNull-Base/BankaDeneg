@@ -1,5 +1,6 @@
 using Figgle;
 using Microsoft.OpenApi.Models;
+using SharedModels;
 using WalletAPI.Handlers;
 using WalletAPI.Services;
 using TokenHandler = WalletAPI.Handlers.TokenHandler;
@@ -9,7 +10,7 @@ Console.Write(FiggleFonts.Standard.Render("DEVNULL"));
 Console.ForegroundColor = ConsoleColor.White;
 
 var builder = WebApplication.CreateBuilder(args);
-//builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 builder.Services.AddSingleton<ITokenService, TokenService>();
 builder.Services.AddTransient<TokenHandler>();
@@ -27,8 +28,6 @@ builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title
 
 var app = builder.Build();
 
-//var port = builder.Configuration["Port"];
-//app.Urls.Add($"http://localhost:{port}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -37,6 +36,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankAppAPI V1"); });
     app.UseDeveloperExceptionPage();
+}
+else
+{
+    var port = builder.Configuration["Port"];
+    app.Urls.Add($"http://localhost:{port}");
 }
 
 app.UseHttpsRedirection();
