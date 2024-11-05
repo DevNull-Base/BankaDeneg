@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SharedModels;
 using WalletAPI.Extensions;
 
@@ -35,12 +36,13 @@ public class OpenApiService : IOpenApiService
 
         string content = await response.Content.ReadAsStringAsync();
 
-        var data = JsonConvert.DeserializeObject<dynamic>(content);
+        var raw = JsonConvert.DeserializeObject<JObject>(content);
+        dynamic data = raw.ConvertKeysToUpper();
 
         var result = new Balance
         {
-            Amount = data.Data.Balance.Amount.amount,
-            Currency = data.Data.Balance.Amount.currency,
+            Amount = data.Data.Balance.Amount.Amount,
+            Currency = data.Data.Balance.Amount.Currency,
         };
         
         return result;
@@ -61,23 +63,22 @@ public class OpenApiService : IOpenApiService
 
         string content = await response.Content.ReadAsStringAsync();
 
-        var data = JsonConvert.DeserializeObject<dynamic>(content);
+        var raw = JsonConvert.DeserializeObject<JObject>(content);
+        dynamic data = raw.ConvertKeysToUpper();
         List<Account> result = new List<Account>();
 
         foreach (var account in data.Data.Account)
         {
             var tmp = new Account
             {
-                Id = account.accountId,
-                Status = Enum.Parse<AccountStatus>(account.status.ToString()),
-                Currency = account.currency,
-                Type = Enum.Parse<AccountType>(account.accountType.ToString()),
-                SubType = Enum.Parse<AccountSubType>(account.accountSubType.ToString()),
-                Description = account.accountDescription,
-                SchemeName = EnumExtensions.ParseEnum<AccountSchemeName>(account.AccountDetails[0].schemeName.ToString()),
-                Identification = account.AccountDetails[0].identification,
-                Name = account.AccountDetails[0].name,
-                Owner = account.Owner.name
+                Id = account.AccountId,
+                Status = Enum.Parse<AccountStatus>(account.Status.ToString()),
+                Currency = account.Currency,
+                Type = Enum.Parse<AccountType>(account.AccountType.ToString()),
+                SubType = Enum.Parse<AccountSubType>(account.AccountSubType.ToString()),
+                SchemeName = EnumExtensions.ParseEnum<AccountSchemeName>(account.SchemeName.ToString()),
+                Identification = account.Identification,
+                Name = account.Name,
             };
 
             result.Add(tmp);
@@ -100,20 +101,23 @@ public class OpenApiService : IOpenApiService
 
         string content = await response.Content.ReadAsStringAsync();
 
-        var data = JsonConvert.DeserializeObject<dynamic>(content);
+        var raw = JsonConvert.DeserializeObject<JObject>(content);
+        dynamic data = raw.ConvertKeysToUpper();
         List<Transaction> result = new List<Transaction>();
 
+        throw new Exception("Здесь вообще все сломано");
+        
         foreach (var t in data.Data.Transaction)
         {
             var tmp = new Transaction
             {
-                AccountId = t.accountId,
-                Id = t.transactionId,
-                Reference = t.transactionReference,
-                Type = Enum.Parse<TransactionType>(t.creditDebitIndicator.ToString()),
-                Status = Enum.Parse<TransactionStatus>(t.status.ToString()),
-                Amount = t.Amount.amount,
-                Currency =t.Amount.currency,
+                AccountId = t.AccountId,
+                Id = t.TransactionId,
+                //Reference = t.TransactionReference,
+                Type = Enum.Parse<TransactionType>(t.CreditDebitIndicator.ToString()),
+                //Status = Enum.Parse<TransactionStatus>(t.Status.ToString()),
+                Amount = t.Amount.Amount,
+                Currency =t.Amount.Currency,
 
             };
             result.Add(tmp);

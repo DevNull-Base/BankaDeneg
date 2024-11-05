@@ -9,12 +9,10 @@ public class Account
     public string Currency { get; set; }
     public AccountType Type { get; set; }
     public AccountSubType SubType { get; set; }
-    public string Description { get; set; }
     
     public AccountSchemeName SchemeName { get; set; }
-    public string Identification { get; set; }
-    public string Name { get; set; }
-    public string Owner  { get; set; }
+    public string? Identification { get; set; }
+    public string? Name { get; set; }
 }
 
 public enum AccountStatus
@@ -49,5 +47,8 @@ public enum AccountSchemeName
     CellphoneNumber,
 
     [EnumMember(Value = "RU.CBR.BBAN")]
-    BBAN
+    BBAN,
+    
+    [EnumMember(Value = "RU.CBR.AccountNumber")]
+    AccountNumber,
 }

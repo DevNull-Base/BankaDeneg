@@ -1,5 +1,7 @@
 using Figgle;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using SharedModels;
 using WalletAPI.Handlers;
 using WalletAPI.Services;
@@ -28,6 +30,14 @@ builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title
 
 var app = builder.Build();
 
+
+var settings = new JsonSerializerSettings
+{
+    ContractResolver = new DefaultContractResolver
+    {
+        NamingStrategy = new CamelCaseNamingStrategy()
+    }
+};
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

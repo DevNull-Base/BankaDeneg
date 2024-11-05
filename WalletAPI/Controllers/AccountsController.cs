@@ -15,9 +15,9 @@ public class AccountsController : ControllerBase
     }
     
     [HttpGet("v1/balance")]
-    public async Task<string> Balance()
+    public async Task<string> Balance(string id)
     {
-        var r = await _openApiService.GetBalanceAsync("11139");
+        var r = await _openApiService.GetBalanceAsync(id);
         return r.Amount + " " + r.Currency;
     }
     
