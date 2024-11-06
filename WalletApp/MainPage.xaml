@@ -26,7 +26,7 @@
                 </Frame>
 
                 <!-- Приветствие -->
-                <Label Style="{StaticResource MainHeader}" Text="Добрый день, Владислав"
+                <Label Style="{StaticResource Headline}" Text="Добрый день, Владислав"
                        HorizontalTextAlignment="Start"
                        HorizontalOptions="FillAndExpand"
                        VerticalOptions="Start"

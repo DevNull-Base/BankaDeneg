@@ -51,7 +51,7 @@ public class OpenApiService : IOpenApiService
 
     public async Task<List<Account>> GetAccountsAsync()
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, $"clientInfo/hackathon/v1/accounts");
+        var request = new HttpRequestMessage(HttpMethod.Get, $"clientInfo/hackathon/v1/accounts?page=0");
         request.Headers.Add("x-fapi-auth-date", "<string>");
         request.Headers.Add("x-fapi-customer-ip-address", "<string>");
         request.Headers.Add("x-fapi-interaction-id", "<string>");

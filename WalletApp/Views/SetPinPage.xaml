@@ -5,11 +5,13 @@
              x:Class="WalletApp.Views.SetPinPage">
     <ContentPage.Content>
 
-        <Grid>
-            <!-- Фоновое изображение -->
-            <Image Source="background.png"
-                   Aspect="AspectFill"
-                   Opacity="0.75" />
+        <Grid BackgroundColor="{StaticResource Ink90}">
+
+            <StackLayout Spacing="50">
+                <Rectangle WidthRequest="500" HeightRequest="50"></Rectangle>
+                <Label Style="{StaticResource Headline}" TextColor="{StaticResource Ink70}" Text="Вход"
+                       HorizontalOptions="Center" />
+            </StackLayout>
 
             <StackLayout Padding="20" Spacing="15" VerticalOptions="End" Margin="0,30,0,0">
 
@@ -18,9 +20,9 @@
                 <Label Text="Создайте PIN-код для входа" FontAttributes="Bold" FontSize="Medium"
                        HorizontalOptions="Center" />
 
-                <Label Text="{Binding Pin}" FontSize="32" HorizontalOptions="Center" />
+                <Label Padding="0,20,0,0" Text="{Binding Pin}" FontSize="32" HorizontalOptions="Center" />
 
-                <Grid Padding="20" RowSpacing="10" ColumnSpacing="10" HorizontalOptions="Center">
+                <Grid Padding="20" RowSpacing="10" ColumnSpacing="20" HorizontalOptions="Center">
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -58,14 +60,16 @@
 
                     <Button Style="{StaticResource Pin}" Grid.Row="3" Grid.Column="1" Text="0"
                             Command="{Binding AddDigitCommand}" CommandParameter="0" />
-                    <Button Style="{StaticResource Pin}" Grid.Row="3" Grid.Column="2" Text="C"
+                    <Button Style="{StaticResource Pin}" Grid.Row="3" Grid.Column="2" ImageSource="clear_btn.png"
                             Command="{Binding RemoveLastDigitCommand}" />
                 </Grid>
 
                 <Button Text="Сохранить PIN" Command="{Binding SavePinCommand}"
                         IsEnabled="{Binding IsSaveButtonEnabled}" />
-
-                <Rectangle WidthRequest="100" HeightRequest="60"></Rectangle>
+                <Label Style="{StaticResource Caption}" TextColor="{StaticResource Ink10}" FontSize="14"
+                       Text="Проблемы со входом?">
+                </Label>
+                <Rectangle WidthRequest="100" HeightRequest="10"></Rectangle>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

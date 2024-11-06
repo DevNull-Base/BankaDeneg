@@ -1,10 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace WalletApp.ViewModels;
 
 public class PinEntryViewModel : ObservableObject
 {
+    private static Color disabled = new Color(142, 142, 142);
     private string _pin = string.Empty;
     public string Pin
     {
@@ -12,6 +14,19 @@ public class PinEntryViewModel : ObservableObject
         set => SetProperty(ref _pin, value);
     }
     
+    private ObservableCollection<Color> _pinIndicators = new ObservableCollection<Color>
+    {
+        disabled,
+        disabled,
+        disabled,
+        disabled,
+    };
+
+    public ObservableCollection<Color> PinIndicators
+    {
+        get => _pinIndicators;
+        set => SetProperty(ref _pinIndicators, value);
+    }
 
     private string _errorMessage;
     public string ErrorMessage
@@ -41,6 +56,14 @@ public class PinEntryViewModel : ObservableObject
         {
             Pin += digit;
         }
+        
+        var updatedIndicators = new ObservableCollection<Color>();
+        for (int i = 0; i < 4; i++)
+        {
+            updatedIndicators.Add(Pin.Length > i ? Colors.White : disabled);
+        }
+        
+        PinIndicators = updatedIndicators;
 
         if (Pin.Length == 4)
         {
@@ -61,6 +84,14 @@ public class PinEntryViewModel : ObservableObject
             ErrorMessage = "Неверный PIN";
             HasError = true;
             Pin = string.Empty;
+            
+            var updatedIndicators = new ObservableCollection<Color>();
+            for (int i = 0; i < 4; i++)
+            {
+                updatedIndicators.Add(disabled);
+            }
+        
+            PinIndicators = updatedIndicators;
         }
     }
 }

@@ -20,7 +20,17 @@
     <Color x:Key="Magenta">#D600AA</Color>
     <Color x:Key="MidnightBlue">#190649</Color>
     <Color x:Key="OffBlack">#1f1f1f</Color>
-
+    
+    <Color x:Key="Ink90">#343434</Color>
+    <Color x:Key="Ink80">#494949</Color>
+    <Color x:Key="Ink70">#616161</Color>
+    <Color x:Key="Ink60">#787878</Color>
+    <Color x:Key="Ink50">#8E8E8E</Color>
+    <Color x:Key="Ink40">#D1D1D1</Color>
+    <Color x:Key="Ink30">#E7E7E7</Color>
+    <Color x:Key="Ink20">#F9F9F9</Color>
+    <Color x:Key="Ink10">#F9F9FB</Color>
+    
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
     <Color x:Key="Gray300">#ACACAC</Color>

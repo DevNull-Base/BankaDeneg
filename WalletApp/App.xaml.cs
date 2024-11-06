@@ -15,13 +15,13 @@ public partial class App : Application
     {
         var pin = await SecureStorage.GetAsync("user_pin");
         
-        if (!string.IsNullOrEmpty(pin))
+        /*if (!string.IsNullOrEmpty(pin))
         {
             await Shell.Current.GoToAsync("//PinEntryPage");
         }
         else
         {
             await Shell.Current.GoToAsync("//SetPinPage");
-        }
+        }*/
     }
 }
