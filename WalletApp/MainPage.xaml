@@ -3,40 +3,43 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="WalletApp.MainPage">
+             x:Class="WalletApp.MainPage"
+             BackgroundColor="White">
 
-    <ScrollView Margin="0,30,0,0">
-        <VerticalStackLayout Padding="20" Spacing="20">
+    <ScrollView Margin="0,40,0,0">
+        <VerticalStackLayout Padding="16,0" Spacing="20">
 
             <!--Верхняя панель-->
-            <Grid ColumnSpacing="10">
+            <Grid ColumnSpacing="12" HeightRequest="32">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="5*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Иконка -->
-                <Frame BackgroundColor="Aqua" Style="{StaticResource Avatar}"
-                       WidthRequest="40" HeightRequest="40">
-                    <Image Source="cat.png"
-                           WidthRequest="40" HeightRequest="40"
-                           HorizontalOptions="Start"
+                <Frame BackgroundColor="Transparent" 
+                       HorizontalOptions="Start"
+                       Style="{StaticResource Avatar}"
+                       WidthRequest="28" HeightRequest="28">
+                    <Image Source="btn_person.png"
+                           WidthRequest="28" HeightRequest="28"
+                           HorizontalOptions="Center"
                            VerticalOptions="Center" />
                 </Frame>
 
                 <!-- Приветствие -->
-                <Label Style="{StaticResource Headline}" Text="Добрый день, Владислав"
-                       HorizontalTextAlignment="Start"
+                <Rectangle BackgroundColor="Blue"
                        HorizontalOptions="FillAndExpand"
                        VerticalOptions="Start"
                        Grid.Column="1" />
 
+                
                 <!-- Иконка настроек -->
-                <Image Source="settings.png"
-                       WidthRequest="32"
-                       HeightRequest="32"
+                <Image Source="btn_menu.png"
                        HorizontalOptions="End"
+                       WidthRequest="24"
+                       HeightRequest="24"
                        VerticalOptions="Center"
                        Grid.Column="2" />
             </Grid>

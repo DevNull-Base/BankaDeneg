@@ -60,12 +60,14 @@
 
                     <Button Style="{StaticResource Pin}" Grid.Row="3" Grid.Column="1" Text="0"
                             Command="{Binding AddDigitCommand}" CommandParameter="0" />
-                    <Button Style="{StaticResource Pin}" Grid.Row="3" Grid.Column="2" ImageSource="clear_btn.png"
+                    <ImageButton Aspect="Center" Style="{StaticResource PinImage}" Grid.Row="3" Grid.Column="2" Source="btn_clear.png"
                             Command="{Binding RemoveLastDigitCommand}" />
                 </Grid>
 
-                <Button Text="Сохранить PIN" Command="{Binding SavePinCommand}"
-                        IsEnabled="{Binding IsSaveButtonEnabled}" />
+                <Button x:Name="Btn" Text="Сохранить PIN" TextColor="Black" BackgroundColor="White" 
+                        Command="{Binding SavePinCommand}"
+                        IsEnabled="{Binding IsSaveButtonEnabled}" 
+                        HeightRequest="50"/>
                 <Label Style="{StaticResource Caption}" TextColor="{StaticResource Ink10}" FontSize="14"
                        Text="Проблемы со входом?">
                 </Label>

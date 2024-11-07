@@ -5,21 +5,20 @@ namespace WalletApp.ViewModels;
 
 public class SetPinViewModel : ObservableObject
 {
-    // Текущий PIN
     private string _pin = string.Empty;
+
     public string Pin
     {
         get => _pin;
         set
         {
             SetProperty(ref _pin, value);
-            OnPropertyChanged(nameof(IsSaveButtonEnabled)); 
+            OnPropertyChanged(nameof(IsSaveButtonEnabled));
         }
-        
     }
-    
+
     public bool IsSaveButtonEnabled => Pin.Length == 4;
-    
+
     public IRelayCommand<string> AddDigitCommand { get; }
     public IRelayCommand RemoveLastDigitCommand { get; }
     public IAsyncRelayCommand SavePinCommand { get; }
@@ -46,6 +45,7 @@ public class SetPinViewModel : ObservableObject
             Pin = Pin.Remove(Pin.Length - 1);
         }
     }
+    
 
     private async Task SavePinAsync()
     {
@@ -55,4 +55,5 @@ public class SetPinViewModel : ObservableObject
             await Shell.Current.GoToAsync("//MainPage");
         }
     }
+    
 }
