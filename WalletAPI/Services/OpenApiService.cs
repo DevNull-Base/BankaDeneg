@@ -2,19 +2,21 @@
 using Newtonsoft.Json.Linq;
 using SharedModels;
 using WalletAPI.Extensions;
+using WalletAPI.Models;
 
 namespace WalletAPI.Services;
 
 public interface IOpenApiService
 {
-    Task<Balance> GetBalanceAsync(string accountId);
-    Task<List<Account>> GetAccountsAsync();
-    Task<List<Transaction>> GetTransactionsAsync();
+    Task<Balance> GetBalanceAsync(UserAccountCredentials user, string accountId);
+    Task<List<Account>> GetAccountsAsync(UserAccountCredentials user);
+    Task<List<Transaction>> GetTransactionsAsync(UserAccountCredentials user);
 }
 
 public class OpenApiService : IOpenApiService
 {
     private readonly HttpClient _httpClient;
+    private IOpenApiService _openApiServiceImplementation;
 
     public OpenApiService(HttpClient httpClient)
     {
@@ -22,7 +24,7 @@ public class OpenApiService : IOpenApiService
         _httpClient.BaseAddress = new Uri("https://api.bankingapi.ru/extapi/aft/");
     }
 
-    public async Task<Balance> GetBalanceAsync(string accountId)
+    public async Task<Balance> GetBalanceAsync(UserAccountCredentials user, string accountId)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, $"clientInfo/hackathon/v1/accounts/{accountId}/balance");
         request.Headers.Add("x-fapi-auth-date", "<string>");
@@ -31,6 +33,8 @@ public class OpenApiService : IOpenApiService
         request.Headers.Add("x-customer-user-agent", "<string>");
         request.Headers.Add("Accept", "application/json");
 
+        request.Headers.Add("Authorization", "Bearer " + await user.GetAccessTokenAsync());
+        
         var response = await _httpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
@@ -49,7 +53,7 @@ public class OpenApiService : IOpenApiService
     }
 
 
-    public async Task<List<Account>> GetAccountsAsync()
+    public async Task<List<Account>> GetAccountsAsync(UserAccountCredentials user)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, $"clientInfo/hackathon/v1/accounts?page=0");
         request.Headers.Add("x-fapi-auth-date", "<string>");
@@ -58,6 +62,8 @@ public class OpenApiService : IOpenApiService
         request.Headers.Add("x-customer-user-agent", "<string>");
         request.Headers.Add("Accept", "application/json");
 
+        request.Headers.Add("Authorization", "Bearer " + await user.GetAccessTokenAsync());
+        
         var response = await _httpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
@@ -87,7 +93,7 @@ public class OpenApiService : IOpenApiService
         return result;
     }
 
-    public async Task<List<Transaction>> GetTransactionsAsync()
+    public async Task<List<Transaction>> GetTransactionsAsync(UserAccountCredentials user)
     {
         var request = new HttpRequestMessage(HttpMethod.Get, $"clientInfo/hackathon/v1/accounts/11139/transaction?page=0&fromBookingDateTime={DateTime.MinValue}&toBookingDateTime={DateTime.Now}");
         request.Headers.Add("x-fapi-auth-date", "<string>");
@@ -95,6 +101,8 @@ public class OpenApiService : IOpenApiService
         request.Headers.Add("x-fapi-interaction-id", "<string>");
         request.Headers.Add("x-customer-user-agent", "<string>");
         request.Headers.Add("Accept", "application/json");
+        
+        request.Headers.Add("Authorization", "Bearer " + await user.GetAccessTokenAsync());
 
         var response = await _httpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();
