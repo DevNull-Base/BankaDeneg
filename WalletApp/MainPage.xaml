@@ -6,157 +6,302 @@
              x:Class="WalletApp.MainPage"
              BackgroundColor="White">
 
-    <ScrollView Margin="0,40,0,0">
-        <VerticalStackLayout Padding="16,0" Spacing="20">
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Margin="0,40,0,0">
+            <VerticalStackLayout Spacing="20">
 
-            <!--Верхняя панель-->
-            <Grid ColumnSpacing="12" HeightRequest="32">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
-
-                <!-- Иконка -->
-                <Frame BackgroundColor="Transparent"
-                       HorizontalOptions="Start"
-                       Style="{StaticResource Avatar}"
-                       WidthRequest="28" HeightRequest="28">
-                    <Image Source="btn_person.png"
-                           WidthRequest="28" HeightRequest="28"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center" />
-                </Frame>
-
-                <!-- Поиск -->
-                <Frame BackgroundColor="{StaticResource Ink30}"
-                       HorizontalOptions="FillAndExpand"
-                       CornerRadius="12"
-                       Grid.Column="1"
-                       HeightRequest="32">
-                    <SearchBar Placeholder="Поиск"
-                               HorizontalOptions="FillAndExpand" />
-                </Frame>
-
-                <!-- Иконка настроек -->
-                <Image Source="btn_menu.png"
-                       HorizontalOptions="End"
-                       WidthRequest="24"
-                       HeightRequest="24"
-                       VerticalOptions="Center"
-                       Grid.Column="2" />
-            </Grid>
-
-            <!--Главная-->
-            <Label Text="Главная"
-                   TextColor="Black"
-                   FontSize="24"
-                   FontAttributes="Bold" />
-            
-            <CarouselView x:Name="carouselView"
-                          ItemsSource="{Binding Items}"
-                          HorizontalOptions="FillAndExpand"
-                          VerticalOptions="Fill"
-                          PeekAreaInsets="15, 0, 0, 0">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BackgroundColor="Transparent">
-                            <StackLayout>
-                                <Image Source="form_card.png"></Image>
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-
-            <Frame>
-                <Label Text="100 000 ₽"
-                       HeightRequest="100"
-                       VerticalTextAlignment="Center"
-                       FontSize="32"
-                       FontAttributes="Bold"
-                       TextColor="Green"
-                       HorizontalOptions="Center" />
-                <Frame.Shadow>
-                    <Shadow Brush="Gray" Opacity="0.5" Radius="20" Offset="0,4"></Shadow>
-                </Frame.Shadow>
-            </Frame>
-
-            <!--Услуги-->
-            <Label Text="Доступные услуги"
-                   FontSize="24"
-                   FontAttributes="Bold" />
-            <Frame>
-                <Frame.Shadow>
-                    <Shadow Brush="Gray" Opacity="0.5" Radius="20" Offset="0,4"></Shadow>
-                </Frame.Shadow>
-
-                <Grid ColumnSpacing="20" RowSpacing="10" Padding="20" HorizontalOptions="Center">
+                <!--Верхняя панель-->
+                <Grid Padding="16,0" ColumnSpacing="12" HeightRequest="32">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
+                    <!-- Иконка -->
+                    <Frame BackgroundColor="Transparent"
+                           HorizontalOptions="Start"
+                           Style="{StaticResource Avatar}"
+                           WidthRequest="28" HeightRequest="28">
+                        <Image Source="btn_person.png"
+                               WidthRequest="28" HeightRequest="28"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
 
-                    <VerticalStackLayout Grid.Row="0" Grid.Column="0">
-                        <VerticalStackLayout.Behaviors>
-                            <toolkit:TouchBehavior
-                                DefaultAnimationDuration="250"
-                                DefaultAnimationEasing="{x:Static Easing.CubicInOut}"
-                                PressedOpacity="0.6"
-                                PressedScale="0.8" />
-                        </VerticalStackLayout.Behaviors>
+                    <!-- Поиск -->
+                    <Frame BackgroundColor="{StaticResource Ink30}"
+                           HorizontalOptions="FillAndExpand"
+                           CornerRadius="12"
+                           Grid.Column="1"
+                           HeightRequest="32">
+                        <SearchBar Placeholder="Поиск"
+                                   HorizontalOptions="FillAndExpand" />
+                    </Frame>
 
-                        <Image Source="dota2.png" />
-                        <Label Text="Dota 2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Grid.Row="0" Grid.Column="1">
-                        <Image Source="word.png" />
-                        <Label Text="Word" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Grid.Row="0" Grid.Column="2">
-                        <Image Source="powerpoint.png" />
-                        <Label Text="Power Point" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Grid.Row="0" Grid.Column="3">
-                        <Image Source="excel.png" />
-                        <Label Text="Excel" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Grid.Row="1" Grid.Column="0">
-                        <Image Source="rider.png" />
-                        <Label Text="Rider" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Grid.Row="1" Grid.Column="1">
-                        <Image Source="vscode.png" />
-                        <Label Text="VS Code" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Grid.Row="1" Grid.Column="2">
-                        <Image Source="azure.png" />
-                        <Label Text="Azure" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Grid.Row="1" Grid.Column="3">
-                        <Image Source="docker.png" />
-                        <Label Text="Docker" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </VerticalStackLayout>
-
+                    <!-- Иконка настроек -->
+                    <Image Source="btn_menu.png"
+                           HorizontalOptions="End"
+                           WidthRequest="24"
+                           HeightRequest="24"
+                           VerticalOptions="Center"
+                           Grid.Column="2" />
                 </Grid>
 
-            </Frame>
+                <!--Главная-->
+                <Label Text="Главная"
+                       TextColor="Black"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       Padding="16,0" />
 
-        </VerticalStackLayout>
-    </ScrollView>
+                <!--Карусель-->
+                <CarouselView x:Name="carouselView"
+                              ItemsSource="{Binding Items}"
+                              Loop="False"
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand"
+                              TranslationX="-50"
+                              WidthRequest="{Binding ScreenWidthAdd25}"
+                              PeekAreaInsets="210,0,0,0">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="Transparent"
+                                   WidthRequest="280"
+                                   HeightRequest="200">
+                                <Frame.Shadow>
+                                    <Shadow Brush="Black"
+                                            Offset="0, 10"
+                                            Radius="8"
+                                            Opacity="0.1" />
+                                </Frame.Shadow>
+
+                                <Grid>
+                                    <!-- Фон с изображением карты -->
+                                    <Image Source="form_card.png" Aspect="AspectFit" />
+
+                                    <!-- Текстовые элементы -->
+                                    <Grid Padding="18" VerticalOptions="Start" HorizontalOptions="Start">
+                                        <Label Text="{Binding Title}"
+                                               Style="{StaticResource Headline}"
+                                               FontSize="14"
+                                               FontFamily="InterSemiBold"
+                                               TextColor="{StaticResource Ink40}"
+                                               VerticalOptions="Start"
+                                               HorizontalOptions="Start" />
+                                    </Grid>
+
+                                    <!-- Текстовые элементы -->
+                                    <Grid Padding="18" VerticalOptions="End" HorizontalOptions="Start">
+                                        <StackLayout>
+                                            <Label Text="Баланс счета"
+                                                   FontSize="9"
+                                                   FontFamily="InterRegular"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Start"
+                                                   Padding="4,0" />
+
+                                            <Label Text="{Binding Description}"
+                                                   FontSize="28"
+                                                   FontFamily="InterExtraLight"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Start" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+                <!--ЧИФ-->
+                <Grid ColumnDefinitions="*,auto" Padding="16,0">
+                    <Label Text="Часто используемые функции"
+                           VerticalTextAlignment="Center"
+                           TextColor="Black"
+                           FontSize="16"
+                           FontFamily="InterMedium" />
+
+                    <Button Grid.Column="1"
+                            VerticalOptions="Center"
+                            WidthRequest="24"
+                            HeightRequest="24">
+                    </Button>
+                </Grid>
+
+                <!--Кнопочки-->
+                <Grid ColumnDefinitions="*,*,*" Padding="16,0">
+                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                        <Frame BackgroundColor="{StaticResource Ink90}"
+                               WidthRequest="56"
+                               HeightRequest="56"
+                               CornerRadius="999">
+                            <Frame.Shadow>
+                                <Shadow Brush="Black"
+                                        Offset="0, 5"
+                                        Radius="4"
+                                        Opacity="0.3" />
+                            </Frame.Shadow>
+                        </Frame>
+
+                        <Label Text="Перевод"
+                               Style="{StaticResource Caption}"
+                               FontSize="12"
+                               Padding="0,10" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                        <Frame BackgroundColor="{StaticResource Ink90}"
+                               WidthRequest="56"
+                               HeightRequest="56"
+                               CornerRadius="999">
+                            <Frame.Shadow>
+                                <Shadow Brush="Black"
+                                        Offset="0, 5"
+                                        Radius="4"
+                                        Opacity="0.3" />
+                            </Frame.Shadow>
+                        </Frame>
+
+                        <Label Text="Перевод"
+                               Style="{StaticResource Caption}"
+                               FontSize="11"
+                               Padding="0,10" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                        <Frame BackgroundColor="{StaticResource Ink90}"
+                               WidthRequest="56"
+                               HeightRequest="56"
+                               CornerRadius="999">
+                            <Frame.Shadow>
+                                <Shadow Brush="Black"
+                                        Offset="0, 5"
+                                        Radius="4"
+                                        Opacity="0.3" />
+                            </Frame.Shadow>
+                        </Frame>
+
+                        <Label Text="Перевод"
+                               Style="{StaticResource Caption}"
+                               FontSize="11"
+                               Padding="0,10" />
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!--Траты-->
+                <Grid ColumnDefinitions="*,auto" Padding="16,0">
+                    <Label Text="Траты за ноябрь"
+                           VerticalTextAlignment="Center"
+                           TextColor="Black"
+                           FontSize="16"
+                           FontFamily="InterMedium" />
+
+                    <Label Text="Посмотреть все"
+                           Grid.Column="1"
+                           VerticalTextAlignment="Center"
+                           Style="{StaticResource Caption}"
+                           FontSize="12" />
+                </Grid>
+
+                <!--Шкала по категориям трат-->
+                <Frame Margin="16,0" HeightRequest="10"
+                       BackgroundColor="Transparent"
+                       BorderColor="Transparent"
+                       CornerRadius="12">
+                    <Grid x:Name="ProgressBarGrid" HorizontalOptions="FillAndExpand">
+                    </Grid>
+                </Frame>
+
+                <Frame BackgroundColor="White" Margin="16,0">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.4" />
+                    </Frame.Shadow>
+
+                    <VerticalStackLayout Padding="16,15">
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label Text="Сегодня"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="Black"
+                                   FontSize="16"
+                                   FontFamily="InterMedium" />
+
+                            <Label Text="08.11.2024"
+                                   Grid.Column="1"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   FontSize="12" />
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding Transactions}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="0,8" ColumnSpacing="8" ColumnDefinitions="auto, *, auto">
+                                        <Frame WidthRequest="32"
+                                               HeightRequest="32"
+                                               CornerRadius="999">
+                                        </Frame>
+
+                                        <Grid Grid.Column="1" RowSpacing="4" RowDefinitions="*,*">
+                                            <Label Text="{Binding Description}"
+                                                   TextColor="Black"
+                                                   FontSize="14"
+                                                   FontFamily="InterMedium"
+                                                   Grid.Row="0" />
+
+                                            <Label Text="{Binding Description}"
+                                                   Style="{StaticResource Caption}"
+                                                   FontSize="11"
+                                                   HorizontalOptions="Start"
+                                                   Grid.Row="1" />
+                                        </Grid>
+
+                                        <Grid Grid.Column="2" RowSpacing="4" RowDefinitions="*,*">
+                                            <Label Text="{Binding Amount}"
+                                                   TextColor="Black"
+                                                   FontSize="14"
+                                                   FontFamily="InterMedium"
+                                                   Grid.Row="0" />
+
+                                            <Label Text="{Binding Source}"
+                                                   Style="{StaticResource Caption}"
+                                                   FontSize="11"
+                                                   HorizontalOptions="End"
+                                                   Grid.Row="1" />
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        <!-- Меню навигации внизу страницы -->
+        <Frame Grid.Row="2" HeightRequest="80" CornerRadius="0" BackgroundColor="White">
+            <Frame.Shadow>
+                <Shadow Brush="Black"
+                        Offset="0, -2"
+                        Radius="6"
+                        Opacity="0.5" />
+            </Frame.Shadow>
+            
+            <Grid Padding="0,0,0,25" ColumnDefinitions="*,*,*,*,*">
+                <Button HorizontalOptions="Fill" Grid.Column="0"></Button>
+                <Button HorizontalOptions="Fill" Grid.Column="1"></Button>
+                <Button HorizontalOptions="Fill" Grid.Column="2"></Button>
+                <Button HorizontalOptions="Fill" Grid.Column="3"></Button>
+                <Button HorizontalOptions="Fill" Grid.Column="4"></Button>
+            </Grid>
+        </Frame>
+        
+    </Grid>
+    
+    
 
 </ContentPage>
