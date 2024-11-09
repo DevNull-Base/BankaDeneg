@@ -1,11 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using WalletApp.Services;
 
 namespace WalletApp.ViewModels;
 
 public class PinEntryViewModel : ObservableObject
 {
+    private BiometricService _biometricService;
+    
     private static Color disabled = new Color(142, 142, 142);
     private string _pin = string.Empty;
     public string Pin
@@ -44,10 +47,32 @@ public class PinEntryViewModel : ObservableObject
     }
 
     public IRelayCommand<string> AddDigitCommand { get; }
+    public IRelayCommand Fingerprint { get; }
 
     public PinEntryViewModel()
     {
+        _biometricService = new BiometricService();
+        
         AddDigitCommand = new RelayCommand<string>(AddDigit);
+        Fingerprint = new RelayCommand(LoginWithFingerprint);
+
+        LoginWithFingerprint();
+    }
+
+    private async void LoginWithFingerprint()
+    {
+        await Task.Delay(200); //перехват activity
+        
+        if (!await _biometricService.IsFingerprintAvailableAsync()) return;
+        if (await _biometricService.AuthenticateAsync())
+        {
+            await Shell.Current.GoToAsync("//MainPage");
+        }
+        else
+        {
+            ErrorMessage = "Ошибка сканера";
+        }
+        
     }
     
     private void AddDigit(string digit)

@@ -61,14 +61,14 @@
                               Loop="False"
                               HorizontalOptions="FillAndExpand"
                               VerticalOptions="FillAndExpand"
-                              TranslationX="-50"
+                              TranslationX="-25"
                               WidthRequest="{Binding ScreenWidthAdd25}"
-                              PeekAreaInsets="210,0,0,0">
+                              PeekAreaInsets="170,0,0,0">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Frame BackgroundColor="Transparent"
                                    WidthRequest="280"
-                                   HeightRequest="200">
+                                   HeightRequest="180">
                                 <Frame.Shadow>
                                     <Shadow Brush="Black"
                                             Offset="0, 10"
@@ -283,7 +283,7 @@
         </ScrollView>
         
         <!-- Меню навигации внизу страницы -->
-        <Frame Grid.Row="2" HeightRequest="80" CornerRadius="0" BackgroundColor="White">
+        <Frame Grid.Row="2" HeightRequest="60" CornerRadius="0" BackgroundColor="White">
             <Frame.Shadow>
                 <Shadow Brush="Black"
                         Offset="0, -2"
@@ -291,12 +291,12 @@
                         Opacity="0.5" />
             </Frame.Shadow>
             
-            <Grid Padding="0,0,0,25" ColumnDefinitions="*,*,*,*,*">
-                <Button HorizontalOptions="Fill" Grid.Column="0"></Button>
-                <Button HorizontalOptions="Fill" Grid.Column="1"></Button>
-                <Button HorizontalOptions="Fill" Grid.Column="2"></Button>
-                <Button HorizontalOptions="Fill" Grid.Column="3"></Button>
-                <Button HorizontalOptions="Fill" Grid.Column="4"></Button>
+            <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
+                <ImageButton Aspect="Center" Source="btn_home_active.png" HorizontalOptions="Fill" Grid.Column="0"></ImageButton>
+                <ImageButton Aspect="Center" Source="btn_payment.png" HorizontalOptions="Fill" Grid.Column="1"></ImageButton>
+                <ImageButton Aspect="Center" Source="btn_chart.png" HorizontalOptions="Fill" Grid.Column="2"></ImageButton>
+                <ImageButton Aspect="Center" Source="btn_card.png" HorizontalOptions="Fill" Grid.Column="3"></ImageButton>
+                <ImageButton Aspect="Center" Source="btn_setting.png" HorizontalOptions="Fill" Grid.Column="4"></ImageButton>
             </Grid>
         </Frame>
         

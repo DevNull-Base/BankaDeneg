@@ -85,7 +85,7 @@
 
                     <Button Style="{StaticResource Pin}" Grid.Row="3" Grid.Column="1" Text="0"
                             Command="{Binding AddDigitCommand}" CommandParameter="0" />
-                    <ImageButton Style="{StaticResource PinImage}" Grid.Row="3" Grid.Column="2" Source="btn_touch.png" />
+                    <ImageButton Style="{StaticResource PinImage}" Command="{Binding Fingerprint}" Grid.Row="3" Grid.Column="2" Source="btn_touch.png" />
                 </Grid>
 
                 <Rectangle WidthRequest="100" HeightRequest="15"></Rectangle>

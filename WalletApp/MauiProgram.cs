@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using WalletApp.Services;
 
 namespace WalletApp;
 
@@ -20,7 +21,8 @@ public static class MauiProgram
                 fonts.AddFont("Inter-Medium.ttf", "InterMedium");
                 fonts.AddFont("Inter-Bold.ttf", "InterBold");
                 fonts.AddFont("Inter-ExtraLight.ttf", "InterExtraLight");
-            });
+            })
+            .Services.AddSingleton<IBiometricService, BiometricService>();
 
 #if DEBUG
         builder.Logging.AddDebug();
