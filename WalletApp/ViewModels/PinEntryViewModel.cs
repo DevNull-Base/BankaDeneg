@@ -102,7 +102,7 @@ public class PinEntryViewModel : ObservableObject
         
         if (Pin == savedPin)
         {
-            await Shell.Current.GoToAsync("//MainPage");
+            await Shell.Current.GoToAsync("//Main");
         }
         else
         {

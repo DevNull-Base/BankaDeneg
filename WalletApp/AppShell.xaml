@@ -12,5 +12,6 @@
     <ShellContent Route="SetPinPage" ContentTemplate="{DataTemplate views:SetPinPage}" />
     <ShellContent Route="PinEntryPage" ContentTemplate="{DataTemplate views:PinEntryPage}" />
     <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
+    <ShellContent Route="Budget" ContentTemplate="{DataTemplate views:BudgetPage}" />
 
 </Shell>

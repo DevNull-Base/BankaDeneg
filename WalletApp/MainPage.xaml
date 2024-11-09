@@ -306,11 +306,21 @@
             </Frame.Shadow>
 
             <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
-                <ImageButton Aspect="Center" Source="btn_home_active.png" HorizontalOptions="Fill" Grid.Column="0"></ImageButton>
-                <ImageButton Aspect="Center" Source="btn_payment.png" HorizontalOptions="Fill" Grid.Column="1"></ImageButton>
-                <ImageButton Aspect="Center" Source="btn_chart.png" HorizontalOptions="Fill" Grid.Column="2"></ImageButton>
-                <ImageButton Aspect="Center" Source="btn_card.png" HorizontalOptions="Fill" Grid.Column="3"></ImageButton>
-                <ImageButton Aspect="Center" Source="btn_setting.png" HorizontalOptions="Fill" Grid.Column="4"></ImageButton>
+                <ImageButton Aspect="Center" Source="btn_home_active.png" 
+                             HorizontalOptions="Fill" Grid.Column="0" 
+                             Command="{Binding NavigateToPage}" CommandParameter="Main"/>
+                <ImageButton Aspect="Center" Source="btn_payment.png" 
+                             HorizontalOptions="Fill" Grid.Column="1" 
+                             Command="{Binding NavigateToPage}" CommandParameter="Payment"/>
+                <ImageButton Aspect="Center" Source="btn_chart.png" 
+                             HorizontalOptions="Fill" Grid.Column="2" 
+                             Command="{Binding NavigateToPage}" CommandParameter="Budget"/>
+                <ImageButton Aspect="Center" Source="btn_card.png" 
+                             HorizontalOptions="Fill" Grid.Column="3" 
+                             Command="{Binding NavigateToPage}" CommandParameter="Card"/>
+                <ImageButton Aspect="Center" Source="btn_setting.png" 
+                             HorizontalOptions="Fill" Grid.Column="4" 
+                             Command="{Binding NavigateToPage}" CommandParameter="Setting"/>
             </Grid>
         </Frame>
 

@@ -1,17 +1,23 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using WalletApp.Models;
+using WalletApp.Services;
 
 namespace WalletApp.ViewModels;
 
-public class MainViewModel: ObservableObject, INotifyPropertyChanged
+public partial class MainViewModel: ObservableObject, INotifyPropertyChanged
 {
     public ObservableCollection<Item> Items { get; set; }
     public ObservableCollection<Transaction> Transactions { get; set; }
     public double ScreenWidth { get; private set; }
     public double ScreenWidthAdd25 { get; private set; }
     public List<Category> Categories { get; set; }
+    
+    public IRelayCommand<string> NavigateToPage { get; }
+    
+    private readonly NavigationService _navigationService;
 
     public MainViewModel()
     {
@@ -40,9 +46,10 @@ public class MainViewModel: ObservableObject, INotifyPropertyChanged
             new Category { Name = "Utilities", Value = 12, Color = Color.FromArgb("#000000") },
             new Category { Name = "Other", Value = 6, Color = Color.FromArgb("#E7E7E7E") },
         };
-    }
-    
 
-    public event PropertyChangedEventHandler PropertyChanged;
+        _navigationService = new NavigationService();
+        
+        NavigateToPage = new RelayCommand<string>(_navigationService.NavigateToPageAsync);
+    }
     
 }

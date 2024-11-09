@@ -73,4 +73,17 @@
       <ProjectReference Include="..\SharedModels\SharedModels.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <MauiXaml Update="MainPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="MainPage.xaml.cs">
+        <DependentUpon>MainPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
 </Project>
