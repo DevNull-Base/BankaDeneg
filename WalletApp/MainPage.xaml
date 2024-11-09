@@ -122,11 +122,12 @@
                            FontSize="16"
                            FontFamily="InterMedium" />
 
-                    <Button Grid.Column="1"
-                            VerticalOptions="Center"
-                            WidthRequest="24"
-                            HeightRequest="24">
-                    </Button>
+                    <ImageButton Grid.Column="1"
+                                 Source="btn_etc.png"
+                                 VerticalOptions="Center"
+                                 WidthRequest="24"
+                                 HeightRequest="24">
+                    </ImageButton>
                 </Grid>
 
                 <!--Кнопочки-->
@@ -136,6 +137,10 @@
                                WidthRequest="56"
                                HeightRequest="56"
                                CornerRadius="999">
+                            
+                            <Image Aspect="Center" WidthRequest="56" 
+                                   HeightRequest="56" Source="btn_arrow_up.png" />
+
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
                                         Offset="0, 5"
@@ -155,6 +160,10 @@
                                WidthRequest="56"
                                HeightRequest="56"
                                CornerRadius="999">
+                            
+                            <Image Aspect="Center" WidthRequest="56" HeightRequest="56" 
+                                   Source="btn_arrow_left.png" />
+
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
                                         Offset="0, 5"
@@ -174,6 +183,11 @@
                                WidthRequest="56"
                                HeightRequest="56"
                                CornerRadius="999">
+                            
+                            <Image Aspect="Center" WidthRequest="56" HeightRequest="56" 
+                                   Source="btn_list.png" />
+
+
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
                                         Offset="0, 5"
@@ -281,7 +295,7 @@
 
             </VerticalStackLayout>
         </ScrollView>
-        
+
         <!-- Меню навигации внизу страницы -->
         <Frame Grid.Row="2" HeightRequest="60" CornerRadius="0" BackgroundColor="White">
             <Frame.Shadow>
@@ -290,7 +304,7 @@
                         Radius="6"
                         Opacity="0.5" />
             </Frame.Shadow>
-            
+
             <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
                 <ImageButton Aspect="Center" Source="btn_home_active.png" HorizontalOptions="Fill" Grid.Column="0"></ImageButton>
                 <ImageButton Aspect="Center" Source="btn_payment.png" HorizontalOptions="Fill" Grid.Column="1"></ImageButton>
@@ -299,9 +313,8 @@
                 <ImageButton Aspect="Center" Source="btn_setting.png" HorizontalOptions="Fill" Grid.Column="4"></ImageButton>
             </Grid>
         </Frame>
-        
+
     </Grid>
-    
-    
+
 
 </ContentPage>
