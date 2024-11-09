@@ -45,13 +45,8 @@ public class AccountsController : ControllerBase
         var user = _userAccountService.GetUserById(userId);
         
         var a = await _openApiService.GetAccountsAsync(user);
-        string tmp = "";
-
-        foreach (var i in a)
-        {
-            tmp += JsonConvert.SerializeObject(a, Formatting.Indented);
-        }
-
+        
+        string tmp = JsonConvert.SerializeObject(a, Formatting.Indented);
         return Ok(tmp);
     }
     

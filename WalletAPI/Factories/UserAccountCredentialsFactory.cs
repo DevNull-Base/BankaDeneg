@@ -12,9 +12,9 @@ public class UserAccountCredentialsFactory
         _tokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
     }
 
-    public UserAccountCredentials Create(string id, string login,string password)
+    public UserCredentials Create(string id, string login,string password)
     {
-        return new UserAccountCredentials(_tokenService)
+        return new UserCredentials(_tokenService)
         {
             Id = id,
             Login = login,

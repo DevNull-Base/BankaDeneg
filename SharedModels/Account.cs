@@ -13,6 +13,9 @@ public class Account
     public AccountSchemeName SchemeName { get; set; }
     public string? Identification { get; set; }
     public string? Name { get; set; }
+    
+    public AccountSchemeName ServiceProviderSchemeName { get; set; }
+    public string ServiceProviderIdentification { get; set; }
 }
 
 public enum AccountStatus
@@ -51,4 +54,10 @@ public enum AccountSchemeName
     
     [EnumMember(Value = "RU.CBR.AccountNumber")]
     AccountNumber,
+    
+    [EnumMember(Value = "RU.CBR.BICFI")]
+    BICFI,
+    
+    [EnumMember(Value = "RU.CBR.BIK")]
+    BIK,
 }
