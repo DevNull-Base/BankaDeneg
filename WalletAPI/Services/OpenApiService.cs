@@ -10,7 +10,7 @@ public interface IOpenApiService
 {
     Task<Balance> GetBalanceAsync(UserCredentials user, string accountId);
     Task<List<Account>> GetAccountsAsync(UserCredentials user);
-    Task<List<Transaction>> GetTransactionsAsync(UserCredentials user);
+    Task<List<Transaction>> GetTransactionsAsync(UserCredentials user, string accountId);
 }
 
 public class OpenApiService : IOpenApiService
@@ -81,7 +81,8 @@ public class OpenApiService : IOpenApiService
                 Type = Enum.Parse<AccountType>(account.accountType.ToString()),
                 SubType = Enum.Parse<AccountSubType>(account.accountSubType.ToString()),
                 Name = account.Owner.name,
-                ServiceProviderSchemeName = EnumExtensions.ParseEnum<AccountSchemeName>(account.ServiceProvider.schemeName.ToString()),
+                ServiceProviderSchemeName =
+                    EnumExtensions.ParseEnum<AccountSchemeName>(account.ServiceProvider.schemeName.ToString()),
                 ServiceProviderIdentification = account.ServiceProvider.identification.ToString()
             };
 
@@ -90,17 +91,17 @@ public class OpenApiService : IOpenApiService
                 tmp.SchemeName = EnumExtensions.ParseEnum<AccountSchemeName>(detail.schemeName.ToString());
                 tmp.Identification = detail.identification;
             }
-            
+
             result.Add(tmp);
         }
 
         return result;
     }
 
-    public async Task<List<Transaction>> GetTransactionsAsync(UserCredentials user)
+    public async Task<List<Transaction>> GetTransactionsAsync(UserCredentials user, string id)
     {
         var request = new HttpRequestMessage(HttpMethod.Get,
-            $"clientInfo/hackathon/v1/accounts/11139/transaction?page=0&fromBookingDateTime={DateTime.MinValue}&toBookingDateTime={DateTime.Now}");
+            $"clientInfo/hackathon/v1/accounts/{id}/transaction?page=0&fromBookingDateTime={DateTime.MinValue}&toBookingDateTime={DateTime.Now}");
         request.Headers.Add("x-fapi-auth-date", "<string>");
         request.Headers.Add("x-fapi-customer-ip-address", "<string>");
         request.Headers.Add("x-fapi-interaction-id", "<string>");
@@ -117,20 +118,33 @@ public class OpenApiService : IOpenApiService
         var data = JsonConvert.DeserializeObject<dynamic>(content);
         List<Transaction> result = new List<Transaction>();
 
-        foreach (var t in data.Data.Transaction)
+
+        var tmp = new Transaction
+        {
+            AccountId = data.Data.accountId,
+            Id = data.Data.transactionId,
+            Amount = data.Data.Amount.amount,
+            Currency = data.Data.Amount.currency,
+        };
+        result.Add(tmp);
+
+
+        //TODO: Исправить в заглушках
+        
+        /*foreach (var t in data.Data)
         {
             var tmp = new Transaction
             {
                 AccountId = t.accountId,
                 Id = t.transactionId,
                 //Reference = t.TransactionReference,
-                Type = Enum.Parse<TransactionType>(t.creditDebitIndicator.ToString()),
+                //Type = Enum.Parse<TransactionType>(t.creditDebitIndicator.ToString()),
                 //Status = Enum.Parse<TransactionStatus>(t.Status.ToString()),
                 Amount = t.Amount.amount,
                 Currency = t.Amount.currency,
             };
             result.Add(tmp);
-        }
+        }*/
 
         return result;
     }

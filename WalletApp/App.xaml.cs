@@ -10,6 +10,23 @@ public partial class App : Application
         InitializeComponent();
         MainPage = new AppShell();
     }
+
+#if WINDOWS
+    protected override Window CreateWindow(IActivationState activationState)
+    {
+        var window = base.CreateWindow(activationState);
+
+
+        window.Width = 600;
+        window.Height = 1200;
+
+
+        window.X = 100;
+        window.Y = 100;
+
+        return window;
+    }
+#endif
     
     protected override async void OnStart()
     {

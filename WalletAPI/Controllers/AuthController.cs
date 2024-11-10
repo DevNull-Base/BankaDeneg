@@ -40,7 +40,7 @@ public class AuthController : ControllerBase
         return Ok(new {VTBtoken = await user.GetAccessTokenAsync()});
     }
 
-    [HttpPost("v1/auth/signup")] //TODO: OpenID костыль выбит костылем
+    [HttpPost("v1/auth/signup")]
     public async Task<IActionResult> SignUp([FromBody] AuthRequest dataRequest)
     {
         using var client = new HttpClient();
@@ -63,7 +63,7 @@ public class AuthController : ControllerBase
         var userAccount = _userACFactory.Create(userId, dataRequest.Login, dataRequest.Password);
         _userAccountService.AddUser(userAccount);
         
-        return Ok(new {Token = GenerateJwtToken(userAccount.Id)});
+        return Ok(new {Token = GenerateJwtToken(userAccount.Id), RefreshToken = GenerateJwtRefreshToken(userAccount.Id) });
     }
 
     private string GenerateJwtToken(string userId)
@@ -79,6 +79,30 @@ public class AuthController : ControllerBase
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var expires = DateTime.Now.AddMinutes(3);
+
+        var token = new JwtSecurityToken(
+            issuer: _configuration["ISSUER"],
+            audience: _configuration["AUDIENCE"],
+            claims: claims,
+            expires: expires,
+            signingCredentials: creds);
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+    
+    private string GenerateJwtRefreshToken(string userId)
+    {
+        var claims = new[]
+        {
+            new Claim("UserId", userId),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
+
+        var secretKey = _configuration["SecretKey"];
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var expires = DateTime.Now.AddMonths(1);
 
         var token = new JwtSecurityToken(
             issuer: _configuration["ISSUER"],

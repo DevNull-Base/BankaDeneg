@@ -14,6 +14,7 @@ public class BiometricService: IBiometricService
 
     public async Task<bool> AuthenticateAsync()
     {
+#if ANDROID
         var result = await CrossFingerprint.Current.AuthenticateAsync(
             new AuthenticationRequestConfiguration("Аутентификация", "Подтвердите вход с помощью отпечатка пальца"));
     
@@ -25,10 +26,16 @@ public class BiometricService: IBiometricService
         {
             return false;
         }
+#endif
+        return false;
     }
 
     public async Task<bool> IsFingerprintAvailableAsync()
     {
+#if ANDROID
         return await CrossFingerprint.Current.IsAvailableAsync();
+#endif
+
+        return false;
     }
 }
