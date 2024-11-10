@@ -18,6 +18,11 @@ public partial class MainPage : ContentPage
         var viewModel = new MainViewModel();
 
         BindingContext = viewModel;
+
+        if ( viewModel.Categories.Count == 0)
+        {
+            return;
+        }
         
         var totalValue = viewModel.Categories.Sum(c => c.Value);
 

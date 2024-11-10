@@ -18,7 +18,7 @@ public class NavigationService
                     await Shell.Current.GoToAsync("//Budget");
                     break;
                 case "Card":
-                    await Shell.Current.GoToAsync("//Card");
+                    await Shell.Current.GoToAsync("//Accounts");
                     break;
                 case "Setting":
                     await Shell.Current.GoToAsync("//Setting");

@@ -23,7 +23,7 @@
                            HorizontalOptions="Start"
                            Style="{StaticResource Avatar}"
                            WidthRequest="28" HeightRequest="28">
-                        <Image Source="btn_person.png"
+                        <Image Source="btn_person.svg"
                                WidthRequest="28" HeightRequest="28"
                                HorizontalOptions="Center"
                                VerticalOptions="Center" />
@@ -40,7 +40,7 @@
                     </Frame>
 
                     <!-- Иконка настроек -->
-                    <Image Source="btn_menu.png"
+                    <Image Source="btn_menu.svg"
                            HorizontalOptions="End"
                            WidthRequest="24"
                            HeightRequest="24"
@@ -78,7 +78,7 @@
 
                                 <Grid>
                                     <!-- Фон с изображением карты -->
-                                    <Image Source="form_card.png" Aspect="AspectFit" />
+                                    <Image Source="form_card.svg" Aspect="AspectFit" />
 
                                     <!-- Текстовые элементы -->
                                     <Grid Padding="18" VerticalOptions="Start" HorizontalOptions="Start">
@@ -123,7 +123,7 @@
                            FontFamily="InterMedium" />
 
                     <ImageButton Grid.Column="1"
-                                 Source="btn_etc.png"
+                                 Source="btn_etc.svg"
                                  VerticalOptions="Center"
                                  WidthRequest="24"
                                  HeightRequest="24">
@@ -139,7 +139,7 @@
                                CornerRadius="999">
                             
                             <Image Aspect="Center" WidthRequest="56" 
-                                   HeightRequest="56" Source="btn_arrow_up.png" />
+                                   HeightRequest="56" Source="btn_arrow_up.svg" />
 
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
@@ -162,7 +162,7 @@
                                CornerRadius="999">
                             
                             <Image Aspect="Center" WidthRequest="56" HeightRequest="56" 
-                                   Source="btn_arrow_left.png" />
+                                   Source="btn_arrow_left.svg" />
 
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
@@ -172,7 +172,7 @@
                             </Frame.Shadow>
                         </Frame>
 
-                        <Label Text="Перевод"
+                        <Label Text="Оплатить"
                                Style="{StaticResource Caption}"
                                FontSize="11"
                                Padding="0,10" />
@@ -185,7 +185,7 @@
                                CornerRadius="999">
                             
                             <Image Aspect="Center" WidthRequest="56" HeightRequest="56" 
-                                   Source="btn_list.png" />
+                                   Source="btn_list.svg" />
 
 
                             <Frame.Shadow>
@@ -196,7 +196,7 @@
                             </Frame.Shadow>
                         </Frame>
 
-                        <Label Text="Перевод"
+                        <Label Text="Детали"
                                Style="{StaticResource Caption}"
                                FontSize="11"
                                Padding="0,10" />
@@ -306,19 +306,19 @@
             </Frame.Shadow>
 
             <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
-                <ImageButton Aspect="Center" Source="btn_home_active.png" 
+                <ImageButton Aspect="Center" Source="btn_home_active.svg" 
                              HorizontalOptions="Fill" Grid.Column="0" 
                              Command="{Binding NavigateToPage}" CommandParameter="Main"/>
-                <ImageButton Aspect="Center" Source="btn_payment.png" 
+                <ImageButton Aspect="Center" Source="btn_payment.svg" 
                              HorizontalOptions="Fill" Grid.Column="1" 
                              Command="{Binding NavigateToPage}" CommandParameter="Payment"/>
-                <ImageButton Aspect="Center" Source="btn_chart.png" 
+                <ImageButton Aspect="Center" Source="btn_chart.svg" 
                              HorizontalOptions="Fill" Grid.Column="2" 
                              Command="{Binding NavigateToPage}" CommandParameter="Budget"/>
-                <ImageButton Aspect="Center" Source="btn_card.png" 
+                <ImageButton Aspect="Center" Source="btn_card.svg" 
                              HorizontalOptions="Fill" Grid.Column="3" 
                              Command="{Binding NavigateToPage}" CommandParameter="Card"/>
-                <ImageButton Aspect="Center" Source="btn_setting.png" 
+                <ImageButton Aspect="Center" Source="btn_setting.svg" 
                              HorizontalOptions="Fill" Grid.Column="4" 
                              Command="{Binding NavigateToPage}" CommandParameter="Setting"/>
             </Grid>

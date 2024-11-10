@@ -36,7 +36,7 @@
                                HorizontalOptions="Start"
                                Style="{StaticResource Avatar}"
                                WidthRequest="28" HeightRequest="28">
-                            <Image Source="btn_person.png"
+                            <Image Source="btn_person.svg"
                                    WidthRequest="28" HeightRequest="28"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center" />
@@ -53,7 +53,7 @@
                         </Frame>
 
                         <!-- Иконка настроек -->
-                        <Image Source="btn_menu.png"
+                        <Image Source="btn_menu.svg"
                                HorizontalOptions="End"
                                WidthRequest="24"
                                HeightRequest="24"
@@ -246,19 +246,19 @@
                 </Frame.Shadow>
 
                 <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
-                    <ImageButton Aspect="Center" Source="btn_home_active.png"
+                    <ImageButton Aspect="Center" Source="btn_home.svg"
                                  HorizontalOptions="Fill" Grid.Column="0"
                                  Command="{Binding NavigateToPage}" CommandParameter="MainPage" />
-                    <ImageButton Aspect="Center" Source="btn_payment.png"
+                    <ImageButton Aspect="Center" Source="btn_payment.svg"
                                  HorizontalOptions="Fill" Grid.Column="1"
                                  Command="{Binding NavigateToPage}" CommandParameter="Payment" />
-                    <ImageButton Aspect="Center" Source="btn_chart.png"
+                    <ImageButton Aspect="Center" Source="btn_chart_active.svg"
                                  HorizontalOptions="Fill" Grid.Column="2"
                                  Command="{Binding NavigateToPage}" CommandParameter="Budget" />
-                    <ImageButton Aspect="Center" Source="btn_card.png"
+                    <ImageButton Aspect="Center" Source="btn_card.svg"
                                  HorizontalOptions="Fill" Grid.Column="3"
                                  Command="{Binding NavigateToPage}" CommandParameter="Card" />
-                    <ImageButton Aspect="Center" Source="btn_setting.png"
+                    <ImageButton Aspect="Center" Source="btn_setting.svg"
                                  HorizontalOptions="Fill" Grid.Column="4"
                                  Command="{Binding NavigateToPage}" CommandParameter="Setting" />
                 </Grid>

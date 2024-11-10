@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using WalletApp.Services;
+using WalletApp.ViewModels;
 
 namespace WalletApp;
 
@@ -22,7 +23,12 @@ public static class MauiProgram
                 fonts.AddFont("Inter-Bold.ttf", "InterBold");
                 fonts.AddFont("Inter-ExtraLight.ttf", "InterExtraLight");
             })
-            .Services.AddSingleton<IBiometricService, BiometricService>();
+            .Services
+            .AddSingleton<IAuthService, AuthService>()
+            .AddSingleton<IAPIService, APIService>()
+            .AddSingleton<IBiometricService, BiometricService>()
+            .AddTransient<MainViewModel>()
+            .AddTransient<MainPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -34,7 +40,9 @@ public static class MauiProgram
             handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
 #endif
         });
-
+        
         return builder.Build();
     }
+    
+
 }

@@ -86,4 +86,11 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="credentials.json" />
+      <EmbeddedResource Include="credentials.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
 </Project>
