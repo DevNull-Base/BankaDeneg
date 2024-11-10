@@ -1,7 +1,11 @@
-﻿namespace SharedModels;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class AuthRequest
+namespace SharedModels;
+
+public struct AuthRequest
 {
+    [Required]
     public string Login { get; set; }
+    [Required]
     public string Password { get; set; }
 }

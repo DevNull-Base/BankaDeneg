@@ -26,9 +26,7 @@ public static class MauiProgram
             .Services
             .AddSingleton<IAuthService, AuthService>()
             .AddSingleton<IAPIService, APIService>()
-            .AddSingleton<IBiometricService, BiometricService>()
-            .AddTransient<MainViewModel>()
-            .AddTransient<MainPage>();
+            .AddSingleton<IBiometricService, BiometricService>();
 
 #if DEBUG
         builder.Logging.AddDebug();

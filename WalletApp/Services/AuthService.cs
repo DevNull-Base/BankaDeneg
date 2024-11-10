@@ -83,7 +83,7 @@ public class AuthService : IAuthService
         var authToken = await SecureStorage.GetAsync("AuthToken");
         if (string.IsNullOrEmpty(authToken))
         {
-            return null;
+            return null!;
         }
 
         return authToken;

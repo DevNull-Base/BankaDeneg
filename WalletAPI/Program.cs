@@ -1,10 +1,9 @@
+using System.Reflection;
 using System.Text;
 using Figgle;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using WalletAPI.Factories;
 using WalletAPI.Handlers;
 using WalletAPI.Services;
@@ -17,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
 
-var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["SecretKey"]));
+var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["SecretKey"] ?? string.Empty));
 var issuer = builder.Configuration["ISSUER"];
 var audience = builder.Configuration["AUDIENCE"];
 
@@ -55,12 +54,30 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WalletAPI", Version = "v1" }); 
     
+    // Настройка использования XML-комментариев
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+    
+    
+    c.AddServer(new OpenApiServer
+    {
+        Url = "http://localhost:5041",
+        Description = "Dev"
+    });
+    
+    c.AddServer(new OpenApiServer
+    {
+        Url = "https://api.devnullteam.ru",
+        Description = "Production DevNull server"
+    });
+    
     var securityScheme = new OpenApiSecurityScheme
     {
         Name = "Authorization",
         Description = "Enter JWT Bearer token",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
+        Type = SecuritySchemeType.ApiKey,
         Scheme = "bearer",
         BearerFormat = "JWT",
         Reference = new OpenApiReference
@@ -74,20 +91,25 @@ builder.Services.AddSwaggerGen(c =>
     
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
-        { securityScheme, new string[] { } }
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+            },
+            new List<string>()
+        }
     });
 });
 
 var app = builder.Build();
 
-
-var settings = new JsonSerializerSettings
-{
-    ContractResolver = new DefaultContractResolver
-    {
-        NamingStrategy = new CamelCaseNamingStrategy()
-    }
-};
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -87,7 +87,7 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
         {
             var accounts = await _apiService.GetAccountsAsync();
 
-            decimal totalAmount = 1999;
+            decimal totalAmount = 0;
 
             foreach (var account in accounts)
             {

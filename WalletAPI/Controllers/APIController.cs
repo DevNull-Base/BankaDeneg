@@ -17,59 +17,74 @@ public class APIController : ControllerBase
         _userAccountService = userAccountService;
     }
     
-    /*[HttpGet("v1/balance")]
-    [Authorize]
-    public async Task<IActionResult> Balance(string id)
-    {
-        var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
-        if (string.IsNullOrEmpty(userId)) return NotFound(new { message = "User not found." });
-        var user = _userAccountService.GetUserById(userId);
-        
-        var r = await _openApiService.GetBalanceAsync(user,id);
-        return Ok(new
-        {
-            Balance = new
-            {
-                Amount = r.Amount,
-                Curreny = r.Currency,
-            }
-        });
-    }*/
-    
+    /// <summary>
+    /// Получить список счетов в которых авторизован пользователь
+    /// </summary>
+    /// <returns>Список счетов</returns>
+    /// <response code="200">Возвращает список счетов</response>
+    /// <response code="401">Если пользователь не авторизован</response>
+    /// <response code="404">Если пользователь не найден</response>
+    /// <response code="502">Если произошла ошибка при получении данных</response>
     [HttpGet("v1/accounts")]
+    [ProducesResponseType(typeof(IEnumerable<AccountResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status502BadGateway)]
     [Authorize]
     public async Task<IActionResult> Accounts()
     {
         var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
         if (string.IsNullOrEmpty(userId)) return NotFound(new { message = "User not found." });
         var user = _userAccountService.GetUserById(userId);
-        
-        var accounts = await _openApiService.GetAccountsAsync(user);
 
         List<AccountResponse> response = new List<AccountResponse>();
         
-        List<String> bankName = new List<string>{"ВТБ","СБЕР БАНК","Т БАНК"};
-
-        for (var i = 0; i < accounts.Count; i++)
+        try
         {
-            var ac = accounts[i];
-            var balance = await _openApiService.GetBalanceAsync(user, ac.Id);
-
-            var tmp = new AccountResponse
-            {
-                AccountId = ac.Id,
-                Amount = balance.Amount,
-                Currency = balance.Currency,
-                BankName = bankName[i]
-            };
+            var accounts = await _openApiService.GetAccountsAsync(user);
             
-            response.Add(tmp);
+        
+            List<String> bankName = new List<string>{"ВТБ","СБЕР БАНК","Т БАНК"};
+
+            for (var i = 0; i < accounts.Count; i++)
+            {
+                var ac = accounts[i];
+                var balance = await _openApiService.GetBalanceAsync(user, ac.Id);
+
+                var tmp = new AccountResponse
+                {
+                    AccountId = ac.Id,
+                    Amount = balance.Amount,
+                    Currency = balance.Currency,
+                    BankName = bankName[i]
+                };
+            
+                response.Add(tmp);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(StatusCodes.Status502BadGateway, "Произошла ошибка при получении данных");
         }
 
         return Ok(response);
     }
     
+    
+    /// <summary>
+    /// Получить список транзакций по всем счетам
+    /// </summary>
+    /// <returns>Список транзакций</returns>
+    /// <response code="200">Возвращает список транзакций</response>
+    /// <response code="401">Если пользователь не авторизован</response>
+    /// <response code="404">Если пользователь не найден</response>
+    /// <response code="502">Если произошла ошибка при получении данных</response>
     [HttpGet("v1/transactions")]
+    [ProducesResponseType(typeof(IEnumerable<TransactionResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status502BadGateway)]
     [Authorize]
     public async Task<IActionResult> Transactions()
     {       
@@ -77,27 +92,36 @@ public class APIController : ControllerBase
         if (string.IsNullOrEmpty(userId)) return NotFound(new { message = "User not found." });
         var user = _userAccountService.GetUserById(userId);
         
-        //TODO: изменить в случае если Transaction будет выдавать больше данных 
-        var accounts = await _openApiService.GetAccountsAsync(user);
-        
         List<TransactionResponse> response = new List<TransactionResponse>();
-        List<String> bankName = new List<string>{"ВТБ","СБЕР БАНК","Т БАНК"};
 
-        for (var i = 0; i < accounts.Count; i++)
+        try
         {
-            var ac = accounts[i];
-            var transactions = await _openApiService.GetTransactionsAsync(user, ac.Id);
+            //TODO: изменить в случае если Transaction будет выдавать больше данных 
+            var accounts = await _openApiService.GetAccountsAsync(user);
+        
+            List<String> bankName = new List<string>{"ВТБ","СБЕР БАНК","Т БАНК"};
 
-            var tmp = new TransactionResponse
+            for (var i = 0; i < accounts.Count; i++)
             {
-                Amount = transactions[0].Amount,
-                Currency = transactions[0].Currency,
-                BankName = bankName[i],
-                Type = "Покупка",
-                Title = "null"
-            };
+                var ac = accounts[i];
+                var transactions = await _openApiService.GetTransactionsAsync(user, ac.Id);
+
+                var tmp = new TransactionResponse
+                {
+                    Amount = transactions[0].Amount,
+                    Currency = transactions[0].Currency,
+                    BankName = bankName[i],
+                    Type = "Покупка",
+                    Title = "null"
+                };
             
-            response.Add(tmp);
+                response.Add(tmp);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(StatusCodes.Status502BadGateway, "Произошла ошибка при получении данных");
         }
 
         return Ok(response);

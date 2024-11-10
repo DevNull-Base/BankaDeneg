@@ -25,9 +25,9 @@ public class NavigationService
                     break;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            return;
+            // ignored
         }
     }
 }

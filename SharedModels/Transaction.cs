@@ -1,6 +1,6 @@
 ﻿namespace SharedModels;
 
-public class Transaction
+public struct Transaction
 {
     public string AccountId { get; set; }
     public string Id { get; set; }

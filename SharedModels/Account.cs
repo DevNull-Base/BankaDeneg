@@ -2,7 +2,7 @@
 
 namespace SharedModels;
 
-public class Account
+public struct Account
 {
     public string Id { get; set; }
     public AccountStatus Status { get; set; }

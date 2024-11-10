@@ -2,7 +2,6 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="WalletApp.MainPage"
              BackgroundColor="White">
 
@@ -56,7 +55,7 @@
                        Padding="16,0" />
 
                 <!--Карусель-->
-                <CarouselView x:Name="carouselView"
+                <CarouselView
                               ItemsSource="{Binding Items}"
                               Loop="False"
                               HorizontalOptions="FillAndExpand"

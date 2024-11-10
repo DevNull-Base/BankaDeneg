@@ -29,6 +29,9 @@ public class AuthController : ControllerBase
 
 
     //TODO: Test method
+    /// <summary>
+    /// Тестовый метод
+    /// </summary>
     [HttpPost("v1/auth/login")]
     [Authorize]
     public async Task<IActionResult> Login()
@@ -40,7 +43,16 @@ public class AuthController : ControllerBase
         return Ok(new {VTBtoken = await user.GetAccessTokenAsync()});
     }
 
+     
+    /// <summary>
+    /// Регистрация в приложении
+    /// </summary>
+    /// <returns>Токен и токен обновления</returns>
+    /// <response code="200">Токен и токен обновления</response>
+    /// <response code="401">Авторизация на стороне поставщика не удалась</response>
     [HttpPost("v1/auth/signup")]
+    [ProducesResponseType(typeof(AuthResponse),StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> SignUp([FromBody] AuthRequest dataRequest)
     {
         using var client = new HttpClient();
@@ -62,8 +74,14 @@ public class AuthController : ControllerBase
         var userId = Guid.NewGuid().ToString();
         var userAccount = _userACFactory.Create(userId, dataRequest.Login, dataRequest.Password);
         _userAccountService.AddUser(userAccount);
+
+        var result = new AuthResponse
+        {
+            Token = GenerateJwtToken(userAccount.Id),
+            RefreshToken = GenerateJwtRefreshToken(userAccount.Id)
+        };
         
-        return Ok(new {Token = GenerateJwtToken(userAccount.Id), RefreshToken = GenerateJwtRefreshToken(userAccount.Id) });
+        return Ok(result);
     }
 
     private string GenerateJwtToken(string userId)
