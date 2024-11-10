@@ -24,7 +24,7 @@
         <ApplicationTitle>WalletApp</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.walletapp</ApplicationId>
+        <ApplicationId>com.devnullteam.walletapp</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
