@@ -3,6 +3,13 @@ using Figgle;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+<<<<<<< Updated upstream
+=======
+using WalletAPI.Extensions;
+using WalletAPI.Factories;
+using WalletAPI.Handlers;
+using WalletAPI.Services;
+>>>>>>> Stashed changes
 
 Console.ForegroundColor = ConsoleColor.Blue;
 Console.Write(FiggleFonts.Standard.Render("DEVNULL"));
@@ -21,7 +28,67 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+<<<<<<< Updated upstream
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WalletAPI", Version = "v1" });
+=======
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WalletAPI", Version = "v1" }); 
+    
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+    
+    
+    c.AddServer(new OpenApiServer
+    {
+        Url = "http://localhost:5041",
+        Description = "Dev"
+    });
+    
+    c.AddServer(new OpenApiServer
+    {
+        Url = "https://api.devnullteam.ru",
+        Description = "Production DevNull server"
+    });
+    
+    var securityScheme = new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Description = "Enter JWT Bearer token",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Reference = new OpenApiReference
+        {
+            Type = ReferenceType.SecurityScheme,
+            Id = "Bearer"
+        }
+    };
+    
+    c.AddSecurityDefinition("Bearer", securityScheme);
+    
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+            },
+            new List<string>()
+        }
+    });
+    
+    c.DescribeAllParametersInCamelCase();
+    c.EnableAnnotations();
+    c.SchemaFilter<EnumSchemaFilter>();
+>>>>>>> Stashed changes
 });
 
 
