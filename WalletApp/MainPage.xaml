@@ -56,13 +56,13 @@
 
                 <!--Карусель-->
                 <CarouselView
-                              ItemsSource="{Binding Items}"
-                              Loop="False"
-                              HorizontalOptions="FillAndExpand"
-                              VerticalOptions="FillAndExpand"
-                              TranslationX="-25"
-                              WidthRequest="{Binding ScreenWidthAdd25}"
-                              PeekAreaInsets="170,0,0,0">
+                    ItemsSource="{Binding Items}"
+                    Loop="False"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    TranslationX="-25"
+                    WidthRequest="{Binding ScreenWidthAdd25}"
+                    PeekAreaInsets="170,0,0,0">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Frame BackgroundColor="Transparent"
@@ -77,7 +77,7 @@
 
                                 <Grid>
                                     <!-- Фон с изображением карты -->
-                                    <Image Source="form_card.svg" Aspect="AspectFit" />
+                                    <Image Source="{Binding Shape}" Aspect="AspectFit" />
 
                                     <!-- Текстовые элементы -->
                                     <Grid Padding="18" VerticalOptions="Start" HorizontalOptions="Start">
@@ -85,7 +85,7 @@
                                                Style="{StaticResource Headline}"
                                                FontSize="14"
                                                FontFamily="InterSemiBold"
-                                               TextColor="{StaticResource Ink40}"
+                                               TextColor="White"
                                                VerticalOptions="Start"
                                                HorizontalOptions="Start" />
                                     </Grid>
@@ -132,13 +132,14 @@
                 <!--Кнопочки-->
                 <Grid ColumnDefinitions="*,*,*" Padding="16,0">
                     <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
-                        <Frame BackgroundColor="{StaticResource Ink90}"
+                        <Frame BackgroundColor="#273E51"
                                WidthRequest="56"
                                HeightRequest="56"
                                CornerRadius="999">
-                            
-                            <Image Aspect="Center" WidthRequest="56" 
-                                   HeightRequest="56" Source="btn_arrow_up.svg" />
+
+                            <ImageButton Aspect="Center" Source="btn_arrow_up.svg"
+                                         Command="{Binding NavigateToPage}"
+                                         CommandParameter="Payment" />
 
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
@@ -155,13 +156,14 @@
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
-                        <Frame BackgroundColor="{StaticResource Ink90}"
+                        <Frame BackgroundColor="#273E51"
                                WidthRequest="56"
                                HeightRequest="56"
                                CornerRadius="999">
-                            
-                            <Image Aspect="Center" WidthRequest="56" HeightRequest="56" 
-                                   Source="btn_arrow_left.svg" />
+
+                            <ImageButton Aspect="Center" Source="btn_arrow_left.svg"
+                                         Command="{Binding NavigateToPage}"
+                                         CommandParameter="Payment" />
 
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
@@ -178,13 +180,13 @@
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
-                        <Frame BackgroundColor="{StaticResource Ink90}"
+                        <Frame BackgroundColor="#273E51"
                                WidthRequest="56"
                                HeightRequest="56"
                                CornerRadius="999">
-                            
-                            <Image Aspect="Center" WidthRequest="56" HeightRequest="56" 
-                                   Source="btn_list.svg" />
+
+                            <ImageButton Aspect="Center" Source="btn_list.svg"
+                                         Command="{Binding GoSubscriptionsCommand}"/>
 
 
                             <Frame.Shadow>
@@ -195,7 +197,7 @@
                             </Frame.Shadow>
                         </Frame>
 
-                        <Label Text="Детали"
+                        <Label Text="Подписки"
                                Style="{StaticResource Caption}"
                                FontSize="11"
                                Padding="0,10" />
@@ -256,6 +258,7 @@
                                         <Frame WidthRequest="32"
                                                HeightRequest="32"
                                                CornerRadius="999">
+                                            <Image Source="bkl.png"></Image>
                                         </Frame>
 
                                         <Grid Grid.Column="1" RowSpacing="4" RowDefinitions="*,*">
@@ -292,6 +295,158 @@
                     </VerticalStackLayout>
                 </Frame>
 
+                <Button Margin="16,0" Text="Помощник по расходам"></Button>
+
+                <!--Банки предлагают-->
+                <Grid ColumnDefinitions="*,auto" Padding="16,0">
+                    <Label Text="Банки предлагают"
+                           VerticalTextAlignment="Center"
+                           TextColor="Black"
+                           FontSize="16"
+                           FontFamily="InterMedium" />
+
+                    <ImageButton Grid.Column="1"
+                                 Source="btn_etc.svg"
+                                 VerticalOptions="Center"
+                                 WidthRequest="24"
+                                 HeightRequest="24">
+                    </ImageButton>
+                </Grid>
+
+                <Frame BackgroundColor="White" Margin="16,0">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.4" />
+                    </Frame.Shadow>
+
+                    <VerticalStackLayout Padding="16,15" Spacing="12">
+                        <Label Text="Бонусные программы"
+                               VerticalTextAlignment="Center"
+                               TextColor="Black"
+                               FontSize="16"
+                               FontFamily="InterMedium" />
+
+                        <Grid ColumnDefinitions="*,*,*,*">
+                            <HorizontalStackLayout Grid.Column="0" Spacing="6">
+                                <Frame BackgroundColor="#3A79FF" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="50" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Spacing="6">
+                                <Frame BackgroundColor="#1BA544" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="50" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6">
+                                <Frame BackgroundColor="#EEEE00" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="50" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="3" Spacing="6">
+                                <Frame BackgroundColor="#E42437" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="50" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" Margin="16,0">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.4" />
+                    </Frame.Shadow>
+
+                    <VerticalStackLayout Padding="16,15" Spacing="12">
+                        <Label Text="Вклады"
+                               VerticalTextAlignment="Center"
+                               TextColor="Black"
+                               FontSize="16"
+                               FontFamily="InterMedium" />
+
+                        <Grid ColumnDefinitions="*,*,*,*">
+                            <HorizontalStackLayout Grid.Column="0" Spacing="6">
+                                <Frame BackgroundColor="#3A79FF" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="24%" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Spacing="6">
+                                <Frame BackgroundColor="#1BA544" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="22%" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6">
+                                <Frame BackgroundColor="#EEEE00" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="21%" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="3" Spacing="6">
+                                <Frame BackgroundColor="#E42437" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="23%" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <Frame BackgroundColor="White" Margin="16,0">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.4" />
+                    </Frame.Shadow>
+
+                    <VerticalStackLayout Padding="16,15" Spacing="12">
+                        <Label Text="Кредиты"
+                               VerticalTextAlignment="Center"
+                               TextColor="Black"
+                               FontSize="16"
+                               FontFamily="InterMedium" />
+
+                        <Grid ColumnDefinitions="*,*,*,*">
+                            <HorizontalStackLayout Grid.Column="0" Spacing="6">
+                                <Frame BackgroundColor="#3A79FF" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="24%" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Spacing="6">
+                                <Frame BackgroundColor="#1BA544" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="22%" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6">
+                                <Frame BackgroundColor="#EEEE00" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="21%" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="3" Spacing="6">
+                                <Frame BackgroundColor="#E42437" WidthRequest="24" HeightRequest="24"
+                                       CornerRadius="999" />
+                                <Label Text="23%" TextColor="Black" VerticalTextAlignment="Center"
+                                       FontSize="14" FontFamily="InterSemiBold" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Rectangle BackgroundColor="Transparent" WidthRequest="100" HeightRequest="50"></Rectangle>
+                
             </VerticalStackLayout>
         </ScrollView>
 
@@ -305,21 +460,21 @@
             </Frame.Shadow>
 
             <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
-                <ImageButton Aspect="Center" Source="btn_home_active.svg" 
-                             HorizontalOptions="Fill" Grid.Column="0" 
-                             Command="{Binding NavigateToPage}" CommandParameter="Main"/>
-                <ImageButton Aspect="Center" Source="btn_payment.svg" 
-                             HorizontalOptions="Fill" Grid.Column="1" 
-                             Command="{Binding NavigateToPage}" CommandParameter="Payment"/>
-                <ImageButton Aspect="Center" Source="btn_chart.svg" 
-                             HorizontalOptions="Fill" Grid.Column="2" 
-                             Command="{Binding NavigateToPage}" CommandParameter="Budget"/>
-                <ImageButton Aspect="Center" Source="btn_card.svg" 
-                             HorizontalOptions="Fill" Grid.Column="3" 
-                             Command="{Binding NavigateToPage}" CommandParameter="Card"/>
-                <ImageButton Aspect="Center" Source="btn_setting.svg" 
-                             HorizontalOptions="Fill" Grid.Column="4" 
-                             Command="{Binding NavigateToPage}" CommandParameter="Setting"/>
+                <ImageButton Aspect="Center" Source="btn_home_active.svg"
+                             HorizontalOptions="Fill" Grid.Column="0"
+                             Command="{Binding NavigateToPage}" CommandParameter="Main" />
+                <ImageButton Aspect="Center" Source="btn_payment.svg"
+                             HorizontalOptions="Fill" Grid.Column="1"
+                             Command="{Binding NavigateToPage}" CommandParameter="Payment" />
+                <ImageButton Aspect="Center" Source="btn_chart.svg"
+                             HorizontalOptions="Fill" Grid.Column="2"
+                             Command="{Binding NavigateToPage}" CommandParameter="Budget" />
+                <ImageButton Aspect="Center" Source="btn_card.svg"
+                             HorizontalOptions="Fill" Grid.Column="3"
+                             Command="{Binding NavigateToPage}" CommandParameter="Card" />
+                <ImageButton Aspect="Center" Source="btn_setting.svg"
+                             HorizontalOptions="Fill" Grid.Column="4"
+                             Command="{Binding NavigateToPage}" CommandParameter="Setting" />
             </Grid>
         </Frame>
 

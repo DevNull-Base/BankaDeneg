@@ -15,6 +15,7 @@
     <ShellContent Route="Budget" ContentTemplate="{DataTemplate views:BudgetPage}" />
     <ShellContent Route="Payment" ContentTemplate="{DataTemplate views:PayingPage}" />
     <ShellContent Route="Accounts" ContentTemplate="{DataTemplate views:AccountPage}" />
+    <ShellContent Route="Subscriptions" ContentTemplate="{DataTemplate views:SubscriptionPage}" />
     
     
     

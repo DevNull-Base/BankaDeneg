@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WalletApp.Views.AccountPage"
              BackgroundColor="White">
-<ContentPage.Content>
+    <ContentPage.Content>
         <Grid RowDefinitions="*,auto">
             <ScrollView Margin="0,40,0,0">
                 <VerticalStackLayout Spacing="20" Padding="16,0">
@@ -51,63 +51,63 @@
                     <Label Text="Счета"
                            TextColor="Black"
                            FontSize="24"
-                           FontAttributes="Bold"/>
-                    
+                           FontAttributes="Bold" />
+
                     <CollectionView
-                              ItemsSource="{Binding Items}"
 
-                              HorizontalOptions="FillAndExpand"
-                              VerticalOptions="FillAndExpand">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame BackgroundColor="Transparent"
-                                   WidthRequest="280"
-                                   HeightRequest="180">
-                                <Frame.Shadow>
-                                    <Shadow Brush="Black"
-                                            Offset="0, 10"
-                                            Radius="8"
-                                            Opacity="0.1" />
-                                </Frame.Shadow>
+                        ItemsSource="{Binding Items}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Margin="0,6" BackgroundColor="Transparent"
+                                       WidthRequest="280"
+                                       HeightRequest="180">
+                                    <Frame.Shadow>
+                                        <Shadow Brush="Black"
+                                                Offset="0, 10"
+                                                Radius="8"
+                                                Opacity="0.1" />
+                                    </Frame.Shadow>
 
-                                <Grid>
-                                    <!-- Фон с изображением карты -->
-                                    <Image Source="form_card.svg" Aspect="AspectFit" />
+                                    <Grid>
+                                        <!-- Фон с изображением карты -->
+                                        <Image Source="{Binding Shape}" Aspect="AspectFit" />
 
-                                    <!-- Текстовые элементы -->
-                                    <Grid Padding="18" VerticalOptions="Start" HorizontalOptions="Start">
-                                        <Label Text="{Binding Title}"
-                                               Style="{StaticResource Headline}"
-                                               FontSize="14"
-                                               FontFamily="InterSemiBold"
-                                               TextColor="{StaticResource Ink40}"
-                                               VerticalOptions="Start"
-                                               HorizontalOptions="Start" />
-                                    </Grid>
-
-                                    <!-- Текстовые элементы -->
-                                    <Grid Padding="18" VerticalOptions="End" HorizontalOptions="Start">
-                                        <StackLayout>
-                                            <Label Text="Баланс счета"
-                                                   FontSize="9"
-                                                   FontFamily="InterRegular"
+                                        <!-- Текстовые элементы -->
+                                        <Grid Padding="18" VerticalOptions="Start" HorizontalOptions="Start">
+                                            <Label Text="{Binding Title}"
+                                                   Style="{StaticResource Headline}"
+                                                   FontSize="14"
+                                                   FontFamily="InterSemiBold"
                                                    TextColor="White"
-                                                   HorizontalOptions="Start"
-                                                   Padding="4,0" />
-
-                                            <Label Text="{Binding Description}"
-                                                   FontSize="28"
-                                                   FontFamily="InterExtraLight"
-                                                   TextColor="White"
+                                                   VerticalOptions="Start"
                                                    HorizontalOptions="Start" />
-                                        </StackLayout>
+                                        </Grid>
+
+                                        <!-- Текстовые элементы -->
+                                        <Grid Padding="18" VerticalOptions="End" HorizontalOptions="Start">
+                                            <StackLayout>
+                                                <Label Text="Баланс счета"
+                                                       FontSize="9"
+                                                       FontFamily="InterRegular"
+                                                       TextColor="White"
+                                                       HorizontalOptions="Start"
+                                                       Padding="4,0" />
+
+                                                <Label Text="{Binding Description}"
+                                                       FontSize="28"
+                                                       FontFamily="InterExtraLight"
+                                                       TextColor="White"
+                                                       HorizontalOptions="Start" />
+                                            </StackLayout>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                   
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
                 </VerticalStackLayout>
             </ScrollView>
 

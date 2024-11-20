@@ -43,7 +43,7 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
     public MainViewModel()
     {
         _dispatcher = Application.Current?.Dispatcher;
-        
+
         Items = new ObservableCollection<Item>();
         Transactions = new ObservableCollection<Transaction>();
 
@@ -59,17 +59,16 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
 
         Categories = new List<Category>
         {
-            new Category { Name = "Food", Value = 55, Color = Color.FromArgb("#494949") },
-            new Category { Name = "Transport", Value = 15, Color = Color.FromArgb("#343434") },
-            new Category { Name = "Entertainment", Value = 12, Color = Color.FromArgb("#787878") },
-            new Category { Name = "Utilities", Value = 12, Color = Color.FromArgb("#000000") },
-            new Category { Name = "Other", Value = 6, Color = Color.FromArgb("#E7E7E7E") },
+            new Category { Name = "Food", Value = 55, Color = Color.FromArgb("#6DCA68") },
+            new Category { Name = "Transport", Value = 15, Color = Color.FromArgb("#FD3D3D") },
+            new Category { Name = "Entertainment", Value = 12, Color = Color.FromArgb("#AB297B") },
+            new Category { Name = "Utilities", Value = 12, Color = Color.FromArgb("#3A79FF") },
+            new Category { Name = "Other", Value = 6, Color = Color.FromArgb("#CECECE") },
         };
 
         InitializeAsync();
-        
     }
-    
+
     private async void InitializeAsync()
     {
         await LoginAsync();
@@ -78,20 +77,23 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
 
     private async Task LoginAsync()
     {
-        var credentials = ReadCredentialsFromJson();
-        var login = credentials.Login;
-        var password = credentials.Password;
-
-        var success = await _authService.AuthenticateAsync(login, password);
-        if (success)
+        try
         {
+            var credentials = ReadCredentialsFromJson();
+            var login = credentials.Login;
+            var password = credentials.Password;
+
+            var success = await _authService.AuthenticateAsync(login, password);
+            if (!success) throw new UnauthorizedAccessException();
+
             var accounts = await _apiService.GetAccountsAsync();
 
             decimal totalAmount = 0;
 
             foreach (var account in accounts)
             {
-                if (decimal.TryParse(account.Amount, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal amount))
+                if (decimal.TryParse(account.Amount, NumberStyles.Any, CultureInfo.InvariantCulture,
+                        out decimal amount))
                 {
                     totalAmount += amount;
                 }
@@ -102,27 +104,41 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
                 new Item
                 {
                     Title = "Общий счет",
-                    Description = totalAmount + " ₽"
+                    Description = totalAmount + " ₽",
+                    Shape = "form_card.svg"
                 }
             };
 
             foreach (var ac in accounts)
             {
-                tmp.Add(new Item
+                var item = new Item
                 {
                     Title = ac.BankName,
                     Description = ac.Amount + " ₽"
-                });
+                };
+                
+
+                if (ac.BankName[0] == 'В')
+                {
+                    item.Shape = "form_card_blue.svg";
+                }
+                else if (ac.BankName[0] == 'С')
+                {
+                    item.Shape = "form_card_green.svg";
+                }
+                else
+                {
+                    item.Shape = "form_card_orange.svg";
+                }
+                
+                tmp.Add(item);
             }
-            
-            _dispatcher?.Dispatch(() =>
-            {
-                Items = new ObservableCollection<Item>(tmp);
-            });
+
+            _dispatcher?.Dispatch(() => { Items = new ObservableCollection<Item>(tmp); });
 
 
             var tmp2 = new ObservableCollection<Transaction>();
-            
+
             var transactions = await _apiService.GetTransactionsAsync();
 
             foreach (var t in transactions)
@@ -135,23 +151,21 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
                     Source = t.BankName,
                 });
             }
-            
-            _dispatcher?.Dispatch(() =>
-            {
-                Transactions = new ObservableCollection<Transaction>(tmp2);
-            });
-            
+
+            _dispatcher?.Dispatch(() => { Transactions = new ObservableCollection<Transaction>(tmp2); });
         }
-        else
+        catch (Exception e)
         {
+            Console.WriteLine(e);
+
             _dispatcher?.Dispatch(() =>
             {
                 Items = new ObservableCollection<Item>
                 {
-                    new Item { Title = "Общий счет", Description = "123 030\u20bd" },
-                    new Item { Title = "ВТБ", Description = "23 030\u20bd" },
-                    new Item { Title = "СБЕР", Description = "50 000\u20bd" },
-                    new Item { Title = "Т БАНК", Description = "50 000\u20bd" },
+                    new Item { Title = "Общий счет", Description = "123 030\u20bd", Shape = "form_card.svg" },
+                    new Item { Title = "ВТБ", Description = "23 030\u20bd", Shape = "form_card_blue.svg" },
+                    new Item { Title = "СБЕР", Description = "50 000\u20bd", Shape = "form_card_green.svg" },
+                    new Item { Title = "Т БАНК", Description = "50 000\u20bd", Shape = "form_card_orange.svg" },
                 };
 
                 Transactions = new ObservableCollection<Transaction>
@@ -164,7 +178,7 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
             });
         }
     }
-    
+
     private (string Login, string Password) ReadCredentialsFromJson()
     {
         var assembly = Assembly.GetExecutingAssembly();
@@ -177,6 +191,12 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
             var credentials = JsonSerializer.Deserialize<Credentials>(result);
             return (credentials.Login, credentials.Password);
         }
+    }
+    
+    [RelayCommand]
+    private async Task GoSubscriptions()
+    {
+        await Shell.Current.GoToAsync("//Subscriptions");
     }
 
     private class Credentials

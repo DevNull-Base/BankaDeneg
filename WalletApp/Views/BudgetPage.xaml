@@ -8,12 +8,12 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="SelectedButtonStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="TextColor" Value="White" />
             </Style>
             <Style x:Key="UnselectedButtonStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource Ink10}" />
-                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BackgroundColor" Value="#F9F9FB" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -70,7 +70,7 @@
                     <!--Переключатели-->
                     <HorizontalStackLayout>
                         <Button Text="Доходы / Расходы" CornerRadius="999"
-                                HeightRequest="32" FontSize="11" Margin="0,0,10,0"
+                                HeightRequest="36" FontSize="11" Margin="0,0,10,0"
                                 Command="{Binding ToggleExpensesCommand}">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsExpensesSelected}" Value="True">
@@ -82,7 +82,7 @@
                             </Button.Triggers>
                         </Button>
                         <Button Text="Статистика" CornerRadius="999"
-                                HeightRequest="32" FontSize="11" Margin="0,0,10,0"
+                                HeightRequest="36" FontSize="11" Margin="0,0,10,0"
                                 Command="{Binding ToggleIncomesCommand}">
                             <Button.Triggers>
                                 <DataTrigger TargetType="Button" Binding="{Binding IsIncomesSelected}" Value="True">
@@ -141,6 +141,7 @@
                                             <Frame WidthRequest="32"
                                                    HeightRequest="32"
                                                    CornerRadius="999">
+                                                <Image Source="bkl.png"></Image>
                                             </Frame>
 
                                             <Grid Grid.Column="1" RowSpacing="4" RowDefinitions="*,*">
@@ -196,6 +197,8 @@
                                             <Frame WidthRequest="32"
                                                    HeightRequest="32"
                                                    CornerRadius="999">
+                                                
+                                                <Image Source="bkl.png"></Image>
                                             </Frame>
 
                                             <Grid Grid.Column="1" RowSpacing="4" RowDefinitions="*,*">

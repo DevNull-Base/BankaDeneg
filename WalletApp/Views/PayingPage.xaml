@@ -58,7 +58,7 @@
                     
                     <!--Кнопочки-->
                     <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
-                        <Frame Grid.Column="0" HeightRequest="70" BackgroundColor="White">
+                        <Frame Grid.Column="0" HeightRequest="70" BackgroundColor="{StaticResource Primary }">
                             
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
@@ -69,20 +69,20 @@
                             
                             
                             <Grid ColumnDefinitions="auto, 2*" Padding="16,16">
-                                <Frame BackgroundColor="LightGray" 
+                                <Image Source="btn_arrow_right.svg"
                                        WidthRequest="30" HeightRequest="30"
-                                       HorizontalOptions="Center" CornerRadius="10"/>
+                                       HorizontalOptions="Center"/>
                                 
                                 <Label Text="Перевод" Grid.Column="1"
                                        VerticalTextAlignment="Center"
                                        Style="{StaticResource Caption}"
-                                       TextColor="Black" FontSize="16" />
+                                       TextColor="White" FontSize="16" />
                             </Grid>
                         </Frame>
                         
                         <Button BackgroundColor="Transparent" Command="{Binding GoContacts}"></Button>
                         
-                        <Frame Grid.Column="1" HeightRequest="70" BackgroundColor="White">
+                        <Frame Grid.Column="1" HeightRequest="70" BackgroundColor="{StaticResource Primary}">
                             <Frame.Shadow>
                                 <Shadow Brush="Black"
                                         Offset="0, 2"
@@ -91,14 +91,14 @@
                             </Frame.Shadow>
                             
                             <Grid ColumnDefinitions="auto, 2*" Padding="16,16">
-                                <Frame BackgroundColor="LightGray" 
+                                <Image Source="btn_qr.svg" 
                                        WidthRequest="30" HeightRequest="30"
-                                       HorizontalOptions="Center" CornerRadius="10"/>
+                                       HorizontalOptions="Center"/>
                                 
                                 <Label Text="QR-код" Grid.Column="1"
                                        VerticalTextAlignment="Center"
                                        Style="{StaticResource Caption}"
-                                       TextColor="Black" FontSize="16" />
+                                       TextColor="White" FontSize="16" />
                             </Grid>
                         </Frame>
                         
@@ -127,9 +127,9 @@
                                 <TapGestureRecognizer Command="{Binding GoServicesCommand}"></TapGestureRecognizer>
                             </Grid.GestureRecognizers>
                             
-                            <Frame BackgroundColor="LightGray" 
-                                   WidthRequest="30" HeightRequest="30"
-                                   HorizontalOptions="Center" CornerRadius="10"/>
+                        <Image Source="img_home.svg" 
+                               WidthRequest="30" HeightRequest="30"
+                               HorizontalOptions="Center"/>
                                 
                             <Label Text="ЖКУ" Grid.Column="1"
                                    HorizontalOptions="Start"
@@ -152,9 +152,9 @@
                                 <TapGestureRecognizer Command="{Binding GoServicesCommand}"></TapGestureRecognizer>
                             </Grid.GestureRecognizers>
                             
-                            <Frame BackgroundColor="LightGray" 
-                                   WidthRequest="30" HeightRequest="30"
-                                   HorizontalOptions="Center" CornerRadius="10"/>
+                        <Image Source="img_boxes.svg" 
+                               WidthRequest="30" HeightRequest="30"
+                               HorizontalOptions="Center"/>
                                 
                             <Label Text="Сервисы" Grid.Column="1"
                                    HorizontalOptions="Start"
@@ -177,11 +177,61 @@
                                 <TapGestureRecognizer Command="{Binding GoServicesCommand}"></TapGestureRecognizer>
                             </Grid.GestureRecognizers>
                             
-                            <Frame BackgroundColor="LightGray" 
-                                   WidthRequest="30" HeightRequest="30"
-                                   HorizontalOptions="Center" CornerRadius="10"/>
+                        <Image Source="img_money.svg" 
+                               WidthRequest="30" HeightRequest="30"
+                               HorizontalOptions="Center"/>
                                 
                             <Label Text="Налоги" Grid.Column="1"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame HeightRequest="70" BackgroundColor="White">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0, 2"
+                                    Radius="12"
+                                    Opacity="0.2" />
+                        </Frame.Shadow>
+                            
+                        <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoServicesCommand}"></TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                            
+                            <Image Source="img_bus.svg" 
+                                   WidthRequest="30" HeightRequest="30"
+                                   HorizontalOptions="Center"/>
+                                
+                            <Label Text="Транспорт" Grid.Column="1"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame HeightRequest="70" BackgroundColor="White">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0, 2"
+                                    Radius="12"
+                                    Opacity="0.2" />
+                        </Frame.Shadow>
+                            
+                        <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoServicesCommand}"></TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                            
+                            <Image Source="img_helth.svg" 
+                                   WidthRequest="30" HeightRequest="30"
+                                   HorizontalOptions="Center"/>
+                                
+                            <Label Text="Здравоохранение" Grid.Column="1"
                                    HorizontalOptions="Start"
                                    VerticalTextAlignment="Center"
                                    Style="{StaticResource Caption}"

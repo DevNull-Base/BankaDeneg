@@ -16,7 +16,7 @@ public class APIService : IAPIService
     private readonly IAuthService _authService;
 #if WINDOWS
     private const string BaseUrl = "http://localhost:5041/v1";
-#else 
+#else
     private const string BaseUrl = "https://api.devnullteam.ru/v1";
 #endif
 

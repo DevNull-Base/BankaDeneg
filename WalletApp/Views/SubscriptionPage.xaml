@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalletApp.Views.SubscriptionPage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid Margin="0,40,0,0" RowDefinitions="*,auto">
+            <VerticalStackLayout Padding="16,0" Spacing="20">
+                <!--Верхняя панель-->
+                <Grid ColumnSpacing="12" HeightRequest="32">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Иконка -->
+                    <Frame BackgroundColor="Transparent"
+                           HorizontalOptions="Start"
+                           Style="{StaticResource Avatar}"
+                           WidthRequest="28" HeightRequest="28">
+                        <Image Source="btn_person.svg"
+                               WidthRequest="28" HeightRequest="28"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Поиск -->
+                    <Frame BackgroundColor="{StaticResource Ink30}"
+                           HorizontalOptions="FillAndExpand"
+                           CornerRadius="12"
+                           Grid.Column="1"
+                           HeightRequest="32">
+                        <SearchBar Placeholder="Поиск"
+                                   HorizontalOptions="FillAndExpand" />
+                    </Frame>
+
+                    <!-- Иконка настроек -->
+                    <Image Source="btn_menu.svg"
+                           HorizontalOptions="End"
+                           WidthRequest="24"
+                           HeightRequest="24"
+                           VerticalOptions="Center"
+                           Grid.Column="2" />
+                </Grid>
+
+                <!--Главная-->
+                <Label Text="Подписки"
+                       TextColor="Black"
+                       FontSize="24"
+                       FontAttributes="Bold"/>
+                
+                <Frame HeightRequest="70" BackgroundColor="White">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.2" />
+                    </Frame.Shadow>
+                        
+                            
+                    <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        <Image Source="img_home.svg" 
+                               WidthRequest="30" HeightRequest="30"
+                               HorizontalOptions="Center"/>
+                                
+                        <VerticalStackLayout Grid.Column="1" >
+                            <Label Text="Яндекс Плюс"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                            <Label Text="Отменить не получится никак"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Gray" FontSize="14" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+                
+                <Frame HeightRequest="70" BackgroundColor="White">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.2" />
+                    </Frame.Shadow>
+                        
+                            
+                    <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        <Image Source="img_boxes.svg" 
+                               WidthRequest="30" HeightRequest="30"
+                               HorizontalOptions="Center"/>
+                                
+                        <VerticalStackLayout Grid.Column="1" >
+                            <Label Text="На воздух"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                            <Label Text="Прогулки по экологически чистому району"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Gray" FontSize="14" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+                
+                <Frame HeightRequest="70" BackgroundColor="White">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.2" />
+                    </Frame.Shadow>
+                        
+                            
+                    <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        <Image Source="img_money.svg" 
+                               WidthRequest="30" HeightRequest="30"
+                               HorizontalOptions="Center"/>
+                                
+                        <VerticalStackLayout Grid.Column="1" >
+                            <Label Text="Boosty"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                            <Label Text="Поддержка любимых блогеров"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Gray" FontSize="14" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+                
+                <Frame HeightRequest="70" BackgroundColor="White">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.2" />
+                    </Frame.Shadow>
+                    
+                    <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        <Image Source="img_bus.svg" 
+                               WidthRequest="30" HeightRequest="30"
+                               HorizontalOptions="Center"/>
+                                
+                        <VerticalStackLayout Grid.Column="1" >
+                            <Label Text="Fake Taxi"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                            <Label Text="Сервис доставки хорошего настроения"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Gray" FontSize="14" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+                
+                <Frame HeightRequest="70" BackgroundColor="White">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="0, 2"
+                                Radius="12"
+                                Opacity="0.2" />
+                    </Frame.Shadow>
+                    
+                    <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        <Image Source="img_helth.svg" 
+                               WidthRequest="30" HeightRequest="30"
+                               HorizontalOptions="Center"/>
+                                
+                        <VerticalStackLayout Grid.Column="1" >
+                            <Label Text="Клиника “Денис”"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                            <Label Text="Ежемесячный анализ активности"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Gray" FontSize="14" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+                
+            </VerticalStackLayout>
+            
+            <!-- Меню навигации внизу страницы -->
+            <Frame Grid.Row="2" HeightRequest="60" CornerRadius="0" BackgroundColor="White">
+                <Frame.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="0, -2"
+                            Radius="6"
+                            Opacity="0.5" />
+                </Frame.Shadow>
+
+                <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
+                    <ImageButton Aspect="Center" Source="btn_home_active.svg"
+                                 HorizontalOptions="Fill" Grid.Column="0"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Main" />
+                    <ImageButton Aspect="Center" Source="btn_payment.svg"
+                                 HorizontalOptions="Fill" Grid.Column="1"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Payment" />
+                    <ImageButton Aspect="Center" Source="btn_chart.svg"
+                                 HorizontalOptions="Fill" Grid.Column="2"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Budget" />
+                    <ImageButton Aspect="Center" Source="btn_card.svg"
+                                 HorizontalOptions="Fill" Grid.Column="3"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Card" />
+                    <ImageButton Aspect="Center" Source="btn_setting.svg"
+                                 HorizontalOptions="Fill" Grid.Column="4"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Setting" />
+                </Grid>
+
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
