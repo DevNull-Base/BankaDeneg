@@ -1,25 +1,51 @@
+using System.Reflection;
 using System.Text;
 using Figgle;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-<<<<<<< Updated upstream
-=======
+
 using WalletAPI.Extensions;
 using WalletAPI.Factories;
 using WalletAPI.Handlers;
 using WalletAPI.Services;
->>>>>>> Stashed changes
 
 Console.ForegroundColor = ConsoleColor.Blue;
 Console.Write(FiggleFonts.Standard.Render("DEVNULL"));
 Console.ForegroundColor = ConsoleColor.White;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Configuration.AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
 
+var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["SecretKey"] ?? string.Empty));
+var issuer = builder.Configuration["ISSUER"];
+var audience = builder.Configuration["AUDIENCE"];
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = issuer,
+            ValidateAudience = true,
+            ValidAudience = audience,
+            ValidateLifetime = true,
+            IssuerSigningKey = secretKey,
+            ValidateIssuerSigningKey = true,
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<UserAccountCredentialsFactory>();
+builder.Services.AddSingleton<IUserAccountService, UserAccountService>();
+
+builder.Services.AddSingleton<ITokenService, TokenService>();
+
+builder.Services.AddHttpClient<IOpenApiService, OpenApiService>()
+    .ConfigurePrimaryHttpMessageHandler(() => new UnsafeHttpClientHandler());
 
 builder.Services.AddControllers();
 
@@ -28,11 +54,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-<<<<<<< Updated upstream
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "WalletAPI", Version = "v1" });
-=======
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WalletAPI", Version = "v1" }); 
-    
+  
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
@@ -88,45 +111,29 @@ builder.Services.AddSwaggerGen(c =>
     c.DescribeAllParametersInCamelCase();
     c.EnableAnnotations();
     c.SchemaFilter<EnumSchemaFilter>();
->>>>>>> Stashed changes
 });
 
 
-var secretKey = builder.Configuration["SecretKey"];
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
-        };
-    });
-
 var app = builder.Build();
-
-var port = builder.Configuration["Port"];
-app.Urls.Add($"http://localhost:{port}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     // Использование Swagger
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankAppAPI V1");
-    });
+    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankAppAPI V1"); });
     app.UseDeveloperExceptionPage();
+}
+else
+{
+    var port = builder.Configuration["Port"];
+    app.Urls.Add($"http://localhost:{port}");
 }
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseHttpsRedirection();
 
+app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();

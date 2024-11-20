@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalletApp.Views.BudgetPage"
+             BackgroundColor="White">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SelectedButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style x:Key="UnselectedButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Ink10}" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,auto">
+            <ScrollView Margin="0,40,0,0">
+                <VerticalStackLayout Spacing="20" Padding="16,0">
+
+                    <!--Верхняя панель-->
+                    <Grid ColumnSpacing="12" HeightRequest="32">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Иконка -->
+                        <Frame BackgroundColor="Transparent"
+                               HorizontalOptions="Start"
+                               Style="{StaticResource Avatar}"
+                               WidthRequest="28" HeightRequest="28">
+                            <Image Source="btn_person.svg"
+                                   WidthRequest="28" HeightRequest="28"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Frame>
+
+                        <!-- Поиск -->
+                        <Frame BackgroundColor="{StaticResource Ink30}"
+                               HorizontalOptions="FillAndExpand"
+                               CornerRadius="12"
+                               Grid.Column="1"
+                               HeightRequest="32">
+                            <SearchBar Placeholder="Поиск"
+                                       HorizontalOptions="FillAndExpand" />
+                        </Frame>
+
+                        <!-- Иконка настроек -->
+                        <Image Source="btn_menu.svg"
+                               HorizontalOptions="End"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               VerticalOptions="Center"
+                               Grid.Column="2" />
+                    </Grid>
+
+                    <!--Бюджет-->
+                    <Label Text="Бюджет"
+                           TextColor="Black"
+                           FontSize="24"
+                           FontAttributes="Bold"/>
+                    
+                    <!--Переключатели-->
+                    <HorizontalStackLayout>
+                        <Button Text="Доходы / Расходы" CornerRadius="999"
+                                HeightRequest="32" FontSize="11" Margin="0,0,10,0"
+                                Command="{Binding ToggleExpensesCommand}">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsExpensesSelected}" Value="True">
+                                    <Setter Property="Style" Value="{StaticResource SelectedButtonStyle}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsExpensesSelected}" Value="False">
+                                    <Setter Property="Style" Value="{StaticResource UnselectedButtonStyle}" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                        <Button Text="Статистика" CornerRadius="999"
+                                HeightRequest="32" FontSize="11" Margin="0,0,10,0"
+                                Command="{Binding ToggleIncomesCommand}">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsIncomesSelected}" Value="True">
+                                    <Setter Property="Style" Value="{StaticResource SelectedButtonStyle}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Button" Binding="{Binding IsIncomesSelected}" Value="False">
+                                    <Setter Property="Style" Value="{StaticResource UnselectedButtonStyle}" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </HorizontalStackLayout>
+
+                    <!--Шкалы-->
+                    <Image Source="fantom_bar.svg" IsVisible="{Binding IsExpensesSelected}"></Image>
+                    
+                    <!--Пирог-->
+                    <Image Source="fantom_pie.svg" IsVisible="{Binding IsIncomesSelected}"></Image>
+                    
+                    <!--Дебет-->
+                    <Label Text="-24 000 ₽"
+                           Style="{StaticResource Headline}" 
+                           FontSize="24"
+                           FontFamily="InterMedium"/>
+
+                    <!--Категории-->
+                    <Image Source="fantom_cat.svg"></Image>
+                    
+                    <!--Список транзакций-->
+                    <Frame BackgroundColor="White">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0, 2"
+                                    Radius="12"
+                                    Opacity="0.4" />
+                        </Frame.Shadow>
+
+                        <VerticalStackLayout Padding="16,15">
+                            <Grid ColumnDefinitions="*,auto">
+                                <Label Text="Сегодня"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       FontFamily="InterMedium" />
+
+                                <Label Text="08.11.2024"
+                                       Grid.Column="1"
+                                       VerticalTextAlignment="Center"
+                                       Style="{StaticResource Caption}"
+                                       FontSize="12" />
+                            </Grid>
+
+                            <CollectionView ItemsSource="{Binding Transactions}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="0,8" ColumnSpacing="8" ColumnDefinitions="auto, *, auto">
+                                            <Frame WidthRequest="32"
+                                                   HeightRequest="32"
+                                                   CornerRadius="999">
+                                            </Frame>
+
+                                            <Grid Grid.Column="1" RowSpacing="4" RowDefinitions="*,*">
+                                                <Label Text="{Binding Description}"
+                                                       TextColor="Black"
+                                                       FontSize="14"
+                                                       FontFamily="InterMedium"
+                                                       Grid.Row="0" />
+
+                                                <Label Text="{Binding Description}"
+                                                       Style="{StaticResource Caption}"
+                                                       FontSize="11"
+                                                       HorizontalOptions="Start"
+                                                       Grid.Row="1" />
+                                            </Grid>
+
+                                            <Grid Grid.Column="2" RowSpacing="4" RowDefinitions="*,*">
+                                                <Label Text="{Binding Amount}"
+                                                       TextColor="Black"
+                                                       FontSize="14"
+                                                       FontFamily="InterMedium"
+                                                       Grid.Row="0" />
+
+                                                <Label Text="{Binding Source}"
+                                                       Style="{StaticResource Caption}"
+                                                       FontSize="11"
+                                                       HorizontalOptions="End"
+                                                       Grid.Row="1" />
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            
+                            <Grid ColumnDefinitions="*,auto">
+                                <Label Text="Вчера"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       FontFamily="InterMedium" />
+
+                                <Label Text="07.11.2024"
+                                       Grid.Column="1"
+                                       VerticalTextAlignment="Center"
+                                       Style="{StaticResource Caption}"
+                                       FontSize="12" />
+                            </Grid>
+                            
+                            <CollectionView ItemsSource="{Binding Transactions}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="0,8" ColumnSpacing="8" ColumnDefinitions="auto, *, auto">
+                                            <Frame WidthRequest="32"
+                                                   HeightRequest="32"
+                                                   CornerRadius="999">
+                                            </Frame>
+
+                                            <Grid Grid.Column="1" RowSpacing="4" RowDefinitions="*,*">
+                                                <Label Text="{Binding Description}"
+                                                       TextColor="Black"
+                                                       FontSize="14"
+                                                       FontFamily="InterMedium"
+                                                       Grid.Row="0" />
+
+                                                <Label Text="{Binding Description}"
+                                                       Style="{StaticResource Caption}"
+                                                       FontSize="11"
+                                                       HorizontalOptions="Start"
+                                                       Grid.Row="1" />
+                                            </Grid>
+
+                                            <Grid Grid.Column="2" RowSpacing="4" RowDefinitions="*,*">
+                                                <Label Text="{Binding Amount}"
+                                                       TextColor="Black"
+                                                       FontSize="14"
+                                                       FontFamily="InterMedium"
+                                                       Grid.Row="0" />
+
+                                                <Label Text="{Binding Source}"
+                                                       Style="{StaticResource Caption}"
+                                                       FontSize="11"
+                                                       HorizontalOptions="End"
+                                                       Grid.Row="1" />
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Меню навигации внизу страницы -->
+            <Frame Grid.Row="2" HeightRequest="60" CornerRadius="0" BackgroundColor="White">
+                <Frame.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="0, -2"
+                            Radius="6"
+                            Opacity="0.5" />
+                </Frame.Shadow>
+
+                <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
+                    <ImageButton Aspect="Center" Source="btn_home.svg"
+                                 HorizontalOptions="Fill" Grid.Column="0"
+                                 Command="{Binding NavigateToPage}" CommandParameter="MainPage" />
+                    <ImageButton Aspect="Center" Source="btn_payment.svg"
+                                 HorizontalOptions="Fill" Grid.Column="1"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Payment" />
+                    <ImageButton Aspect="Center" Source="btn_chart_active.svg"
+                                 HorizontalOptions="Fill" Grid.Column="2"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Budget" />
+                    <ImageButton Aspect="Center" Source="btn_card.svg"
+                                 HorizontalOptions="Fill" Grid.Column="3"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Card" />
+                    <ImageButton Aspect="Center" Source="btn_setting.svg"
+                                 HorizontalOptions="Fill" Grid.Column="4"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Setting" />
+                </Grid>
+            </Frame>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

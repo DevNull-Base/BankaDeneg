@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalletApp.Views.ContactsPage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,auto">
+            <ScrollView Margin="0,40,0,0">
+                <VerticalStackLayout Spacing="20" Padding="16,0">
+                    
+                    <!--Верхняя панель-->
+                    <Grid ColumnSpacing="12" HeightRequest="32">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Иконка -->
+                        <Frame BackgroundColor="Transparent"
+                               HorizontalOptions="Start"
+                               Style="{StaticResource Avatar}"
+                               WidthRequest="28" HeightRequest="28">
+                            <Image Source="btn_person.svg"
+                                   WidthRequest="28" HeightRequest="28"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Frame>
+
+                        <!-- Поиск -->
+                        <Frame BackgroundColor="{StaticResource Ink30}"
+                               HorizontalOptions="FillAndExpand"
+                               CornerRadius="12"
+                               Grid.Column="1"
+                               HeightRequest="32">
+                            <SearchBar Placeholder="Поиск"
+                                       HorizontalOptions="FillAndExpand" />
+                        </Frame>
+
+                        <!-- Иконка настроек -->
+                        <Image Source="btn_menu.svg"
+                               HorizontalOptions="End"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               VerticalOptions="Center"
+                               Grid.Column="2" />
+                    </Grid>
+                    
+                    <!--Контакты-->
+                    <Label Text="Контакты"
+                           TextColor="Black"
+                           FontSize="24"
+                           FontAttributes="Bold"/>
+                    
+                    <Frame HeightRequest="70" BackgroundColor="White">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0, 2"
+                                    Radius="12"
+                                    Opacity="0.2" />
+                        </Frame.Shadow>
+                        
+                            
+                        <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                            <Frame BackgroundColor="LightGray" 
+                                   WidthRequest="30" HeightRequest="30"
+                                   HorizontalOptions="Center" CornerRadius="10"/>
+                                
+                            <Label Text="Анатолий С." Grid.Column="1"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame HeightRequest="70" BackgroundColor="White">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0, 2"
+                                    Radius="12"
+                                    Opacity="0.2" />
+                        </Frame.Shadow>
+                        
+                            
+                        <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                            <Frame BackgroundColor="LightGray" 
+                                   WidthRequest="30" HeightRequest="30"
+                                   HorizontalOptions="Center" CornerRadius="10"/>
+                                
+                            <Label Text="Виктория Г." Grid.Column="1"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame HeightRequest="70" BackgroundColor="White">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0, 2"
+                                    Radius="12"
+                                    Opacity="0.2" />
+                        </Frame.Shadow>
+                        
+                            
+                        <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                            <Frame BackgroundColor="LightGray" 
+                                   WidthRequest="30" HeightRequest="30"
+                                   HorizontalOptions="Center" CornerRadius="10"/>
+                                
+                            <Label Text="Влад Билайн" Grid.Column="1"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame HeightRequest="70" BackgroundColor="White">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0, 2"
+                                    Radius="12"
+                                    Opacity="0.2" />
+                        </Frame.Shadow>
+                        
+                            
+                        <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                            <Frame BackgroundColor="LightGray" 
+                                   WidthRequest="30" HeightRequest="30"
+                                   HorizontalOptions="Center" CornerRadius="10"/>
+                                
+                            <Label Text="Николай Ремонт" Grid.Column="1"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame HeightRequest="70" BackgroundColor="White">
+                        <Frame.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="0, 2"
+                                    Radius="12"
+                                    Opacity="0.2" />
+                        </Frame.Shadow>
+                        
+                            
+                        <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                            <Frame BackgroundColor="LightGray" 
+                                   WidthRequest="30" HeightRequest="30"
+                                   HorizontalOptions="Center" CornerRadius="10"/>
+                                
+                            <Label Text="Захар У." Grid.Column="1"
+                                   HorizontalOptions="Start"
+                                   VerticalTextAlignment="Center"
+                                   Style="{StaticResource Caption}"
+                                   TextColor="Black" FontSize="16" />
+                        </Grid>
+                    </Frame>
+                    
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Меню навигации внизу страницы -->
+            <Frame Grid.Row="2" HeightRequest="60" CornerRadius="0" BackgroundColor="White">
+                <Frame.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="0, -2"
+                            Radius="6"
+                            Opacity="0.5" />
+                </Frame.Shadow>
+
+                <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
+                    <ImageButton Aspect="Center" Source="btn_home.svg"
+                                 HorizontalOptions="Fill" Grid.Column="0"
+                                 Command="{Binding NavigateToPage}" CommandParameter="MainPage" />
+                    <ImageButton Aspect="Center" Source="btn_payment_active.svg"
+                                 HorizontalOptions="Fill" Grid.Column="1"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Payment" />
+                    <ImageButton Aspect="Center" Source="btn_chart.svg"
+                                 HorizontalOptions="Fill" Grid.Column="2"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Budget" />
+                    <ImageButton Aspect="Center" Source="btn_card.svg"
+                                 HorizontalOptions="Fill" Grid.Column="3"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Card" />
+                    <ImageButton Aspect="Center" Source="btn_setting.svg"
+                                 HorizontalOptions="Fill" Grid.Column="4"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Setting" />
+                </Grid>
+            </Frame>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

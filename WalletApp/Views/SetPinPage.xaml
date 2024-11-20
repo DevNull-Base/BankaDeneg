@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalletApp.Views.SetPinPage">
+    <ContentPage.Content>
+
+        <Grid BackgroundColor="{StaticResource Ink90}">
+
+            <StackLayout Spacing="50">
+                <Rectangle WidthRequest="500" HeightRequest="50"></Rectangle>
+                <Label Style="{StaticResource Headline}" TextColor="{StaticResource Ink70}" Text="Вход"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout Padding="20" Spacing="15" VerticalOptions="End" Margin="0,30,0,0">
+
+                <Label Text="{Binding ErrorMessage}" HorizontalTextAlignment="Center" TextColor="Red"
+                       IsVisible="{Binding HasError}" />
+                <Label Text="Создайте PIN-код для входа" FontAttributes="Bold" FontSize="Medium"
+                       HorizontalOptions="Center" />
+
+                <Label Padding="0,20,0,0" Text="{Binding Pin}" FontSize="32" HorizontalOptions="Center" />
+
+                <Grid Padding="20" RowSpacing="10" ColumnSpacing="20" HorizontalOptions="Center">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Style="{StaticResource Pin}" Grid.Row="0" Grid.Column="0" Text="1"
+                            Command="{Binding AddDigitCommand}" CommandParameter="1" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="0" Grid.Column="1" Text="2"
+                            Command="{Binding AddDigitCommand}" CommandParameter="2" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="0" Grid.Column="2" Text="3"
+                            Command="{Binding AddDigitCommand}" CommandParameter="3" />
+
+                    <Button Style="{StaticResource Pin}" Grid.Row="1" Grid.Column="0" Text="4"
+                            Command="{Binding AddDigitCommand}" CommandParameter="4" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="1" Grid.Column="1" Text="5"
+                            Command="{Binding AddDigitCommand}" CommandParameter="5" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="1" Grid.Column="2" Text="6"
+                            Command="{Binding AddDigitCommand}" CommandParameter="6" />
+
+                    <Button Style="{StaticResource Pin}" Grid.Row="2" Grid.Column="0" Text="7"
+                            Command="{Binding AddDigitCommand}" CommandParameter="7" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="2" Grid.Column="1" Text="8"
+                            Command="{Binding AddDigitCommand}" CommandParameter="8" />
+                    <Button Style="{StaticResource Pin}" Grid.Row="2" Grid.Column="2" Text="9"
+                            Command="{Binding AddDigitCommand}" CommandParameter="9" />
+
+                    <Button Style="{StaticResource Pin}" Grid.Row="3" Grid.Column="1" Text="0"
+                            Command="{Binding AddDigitCommand}" CommandParameter="0" />
+                    <ImageButton Aspect="Center" Style="{StaticResource PinImage}" Grid.Row="3" Grid.Column="2" Source="btn_clear.png"
+                            Command="{Binding RemoveLastDigitCommand}" />
+                </Grid>
+
+                <Button x:Name="Btn" Text="Сохранить PIN" TextColor="Black" BackgroundColor="White" 
+                        Command="{Binding SavePinCommand}"
+                        IsEnabled="{Binding IsSaveButtonEnabled}" 
+                        HeightRequest="50"/>
+                <Label Style="{StaticResource Caption}" TextColor="{StaticResource Ink10}" FontSize="14"
+                       Text="Проблемы со входом?">
+                </Label>
+                <Rectangle WidthRequest="100" HeightRequest="10"></Rectangle>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

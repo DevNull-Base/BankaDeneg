@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalletApp.Views.AccountPage"
+             BackgroundColor="White">
+<ContentPage.Content>
+        <Grid RowDefinitions="*,auto">
+            <ScrollView Margin="0,40,0,0">
+                <VerticalStackLayout Spacing="20" Padding="16,0">
+
+                    <!--Верхняя панель-->
+                    <Grid ColumnSpacing="12" HeightRequest="32">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Иконка -->
+                        <Frame BackgroundColor="Transparent"
+                               HorizontalOptions="Start"
+                               Style="{StaticResource Avatar}"
+                               WidthRequest="28" HeightRequest="28">
+                            <Image Source="btn_person.svg"
+                                   WidthRequest="28" HeightRequest="28"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Frame>
+
+                        <!-- Поиск -->
+                        <Frame BackgroundColor="{StaticResource Ink30}"
+                               HorizontalOptions="FillAndExpand"
+                               CornerRadius="12"
+                               Grid.Column="1"
+                               HeightRequest="32">
+                            <SearchBar Placeholder="Поиск"
+                                       HorizontalOptions="FillAndExpand" />
+                        </Frame>
+
+                        <!-- Иконка настроек -->
+                        <Image Source="btn_menu.svg"
+                               HorizontalOptions="End"
+                               WidthRequest="24"
+                               HeightRequest="24"
+                               VerticalOptions="Center"
+                               Grid.Column="2" />
+                    </Grid>
+
+                    <!--Счета-->
+                    <Label Text="Счета"
+                           TextColor="Black"
+                           FontSize="24"
+                           FontAttributes="Bold"/>
+                    
+                    <CollectionView
+                              ItemsSource="{Binding Items}"
+
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="Transparent"
+                                   WidthRequest="280"
+                                   HeightRequest="180">
+                                <Frame.Shadow>
+                                    <Shadow Brush="Black"
+                                            Offset="0, 10"
+                                            Radius="8"
+                                            Opacity="0.1" />
+                                </Frame.Shadow>
+
+                                <Grid>
+                                    <!-- Фон с изображением карты -->
+                                    <Image Source="form_card.svg" Aspect="AspectFit" />
+
+                                    <!-- Текстовые элементы -->
+                                    <Grid Padding="18" VerticalOptions="Start" HorizontalOptions="Start">
+                                        <Label Text="{Binding Title}"
+                                               Style="{StaticResource Headline}"
+                                               FontSize="14"
+                                               FontFamily="InterSemiBold"
+                                               TextColor="{StaticResource Ink40}"
+                                               VerticalOptions="Start"
+                                               HorizontalOptions="Start" />
+                                    </Grid>
+
+                                    <!-- Текстовые элементы -->
+                                    <Grid Padding="18" VerticalOptions="End" HorizontalOptions="Start">
+                                        <StackLayout>
+                                            <Label Text="Баланс счета"
+                                                   FontSize="9"
+                                                   FontFamily="InterRegular"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Start"
+                                                   Padding="4,0" />
+
+                                            <Label Text="{Binding Description}"
+                                                   FontSize="28"
+                                                   FontFamily="InterExtraLight"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Start" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                   
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Меню навигации внизу страницы -->
+            <Frame Grid.Row="2" HeightRequest="60" CornerRadius="0" BackgroundColor="White">
+                <Frame.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="0, -2"
+                            Radius="6"
+                            Opacity="0.5" />
+                </Frame.Shadow>
+
+                <Grid Padding="0,0,0,5" ColumnDefinitions="*,*,*,*,*">
+                    <ImageButton Aspect="Center" Source="btn_home.svg"
+                                 HorizontalOptions="Fill" Grid.Column="0"
+                                 Command="{Binding NavigateToPage}" CommandParameter="MainPage" />
+                    <ImageButton Aspect="Center" Source="btn_payment.svg"
+                                 HorizontalOptions="Fill" Grid.Column="1"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Payment" />
+                    <ImageButton Aspect="Center" Source="btn_chart.svg"
+                                 HorizontalOptions="Fill" Grid.Column="2"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Budget" />
+                    <ImageButton Aspect="Center" Source="btn_card_active.svg"
+                                 HorizontalOptions="Fill" Grid.Column="3"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Card" />
+                    <ImageButton Aspect="Center" Source="btn_setting.svg"
+                                 HorizontalOptions="Fill" Grid.Column="4"
+                                 Command="{Binding NavigateToPage}" CommandParameter="Setting" />
+                </Grid>
+            </Frame>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
