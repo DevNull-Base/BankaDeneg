@@ -4,6 +4,8 @@ using Figgle;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+
+using WalletAPI.Extensions;
 using WalletAPI.Factories;
 using WalletAPI.Handlers;
 using WalletAPI.Services;
@@ -52,9 +54,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WalletAPI", Version = "v1" }); 
-    
-    // Настройка использования XML-комментариев
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WalletAPI", Version = "v1" });
+  
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
@@ -106,10 +107,14 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
+    
+    c.DescribeAllParametersInCamelCase();
+    c.EnableAnnotations();
+    c.SchemaFilter<EnumSchemaFilter>();
 });
 
-var app = builder.Build();
 
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

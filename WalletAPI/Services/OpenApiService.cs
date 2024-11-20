@@ -79,7 +79,7 @@ public class OpenApiService : IOpenApiService
                 Id = account.accountId,
                 Currency = account.currency,
                 Type = Enum.Parse<AccountType>(account.accountType.ToString()),
-                SubType = Enum.Parse<AccountSubType>(account.accountSubType.ToString()),
+                SubType = Enum.Parse<BankProductType>(account.accountSubType.ToString()),
                 Name = account.Owner.name,
                 ServiceProviderSchemeName =
                     EnumExtensions.ParseEnum<AccountSchemeName>(account.ServiceProvider.schemeName.ToString()),
