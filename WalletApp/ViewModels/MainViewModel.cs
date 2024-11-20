@@ -3,11 +3,15 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SharedModels;
 using WalletApp.Models;
 using WalletApp.Services;
+using WalletApp.ViewModels.PopupModelView;
+using WalletApp.Views.PopupViews;
 using Transaction = WalletApp.Models.Transaction;
 
 namespace WalletApp.ViewModels;
@@ -39,9 +43,11 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
     public List<Category> Categories { get; set; }
 
     public IRelayCommand<string> NavigateToPage { get; }
+    static Page MainPage => Shell.Current;
 
     public MainViewModel()
     {
+        
         _dispatcher = Application.Current?.Dispatcher;
 
         Items = new ObservableCollection<Item>();
@@ -56,7 +62,8 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
         _navigationService = new NavigationService();
 
         NavigateToPage = new RelayCommand<string>(_navigationService.NavigateToPageAsync);
-
+        
+        
         Categories = new List<Category>
         {
             new Category { Name = "Food", Value = 55, Color = Color.FromArgb("#6DCA68") },
@@ -67,8 +74,9 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
         };
 
         InitializeAsync();
+        
     }
-
+    
     private async void InitializeAsync()
     {
         await LoginAsync();
@@ -177,6 +185,13 @@ public partial class MainViewModel : ObservableObject, INotifyPropertyChanged
                 };
             });
         }
+    }
+    
+    [RelayCommand]
+    private void OpenCardPopup()
+    {
+        var p = new CardholderPopupView();
+        MainPage.ShowPopup(p);
     }
 
     private (string Login, string Password) ReadCredentialsFromJson()

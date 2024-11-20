@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WalletApp.Models;
 using WalletApp.Services;
+using WalletApp.Views.PopupViews;
 
 namespace WalletApp.ViewModels;
 
@@ -24,6 +26,8 @@ public partial class AccountViewModel : ObservableObject
         get => _items;
         set => SetProperty(ref _items, value);
     }
+    
+    static Page MainPage => Shell.Current;
 
     public AccountViewModel()
     {
@@ -118,5 +122,12 @@ public partial class AccountViewModel : ObservableObject
 
             });
         }
+    }
+    
+    [RelayCommand]
+    private void OpenCardPopup(Item i)
+    {
+        var p = new CardholderPopupView();
+        MainPage.ShowPopup(p);
     }
 }

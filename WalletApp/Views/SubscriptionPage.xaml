@@ -2,7 +2,9 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="using:WalletApp.ViewModels"
              x:Class="WalletApp.Views.SubscriptionPage"
+             x:DataType="viewModels:SubscriptionViewModel"
              BackgroundColor="White">
     <ContentPage.Content>
         <Grid Margin="0,40,0,0" RowDefinitions="*,auto">
@@ -61,6 +63,11 @@
                         
                             
                     <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenPopupCommand}" CommandParameter="1"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        
                         <Image Source="img_home.svg" 
                                WidthRequest="30" HeightRequest="30"
                                HorizontalOptions="Center"/>
@@ -90,6 +97,11 @@
                         
                             
                     <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenPopupCommand}" CommandParameter="2"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        
                         <Image Source="img_boxes.svg" 
                                WidthRequest="30" HeightRequest="30"
                                HorizontalOptions="Center"/>
@@ -119,6 +131,11 @@
                         
                             
                     <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenPopupCommand}" CommandParameter="3"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        
                         <Image Source="img_money.svg" 
                                WidthRequest="30" HeightRequest="30"
                                HorizontalOptions="Center"/>
@@ -147,6 +164,11 @@
                     </Frame.Shadow>
                     
                     <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenPopupCommand}" CommandParameter="4"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        
                         <Image Source="img_bus.svg" 
                                WidthRequest="30" HeightRequest="30"
                                HorizontalOptions="Center"/>
@@ -175,6 +197,11 @@
                     </Frame.Shadow>
                     
                     <Grid ColumnDefinitions="auto, 2*" Padding="16,16" ColumnSpacing="16">
+                        
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenPopupCommand}" CommandParameter="5"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        
                         <Image Source="img_helth.svg" 
                                WidthRequest="30" HeightRequest="30"
                                HorizontalOptions="Center"/>

@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using WalletApp.Services;
 using WalletApp.ViewModels;
+using WalletApp.ViewModels.PopupModelView;
+using WalletApp.Views.PopupViews;
 
 namespace WalletApp;
 
@@ -11,8 +13,8 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder
-            .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -24,6 +26,7 @@ public static class MauiProgram
                 fonts.AddFont("Inter-ExtraLight.ttf", "InterExtraLight");
             })
             .Services
+            .AddTransientPopup<SimplePopupView, SimplePopupViewModel>()
             .AddSingleton<IAuthService, AuthService>()
             .AddSingleton<IAPIService, APIService>()
             .AddSingleton<IBiometricService, BiometricService>();

@@ -2,6 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="using:WalletApp.ViewModels"
              x:Class="WalletApp.Views.AccountPage"
              BackgroundColor="White">
     <ContentPage.Content>
@@ -71,11 +72,19 @@
                                     </Frame.Shadow>
 
                                     <Grid>
+                                        
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenCardPopupCommand, Source={RelativeSource AncestorType={x:Type viewModels:AccountViewModel}}}" 
+                                                                  CommandParameter="{Binding .}" />
+                                        </Grid.GestureRecognizers>
+                                        
                                         <!-- Фон с изображением карты -->
                                         <Image Source="{Binding Shape}" Aspect="AspectFit" />
 
                                         <!-- Текстовые элементы -->
                                         <Grid Padding="18" VerticalOptions="Start" HorizontalOptions="Start">
+      
+                                            
                                             <Label Text="{Binding Title}"
                                                    Style="{StaticResource Headline}"
                                                    FontSize="14"

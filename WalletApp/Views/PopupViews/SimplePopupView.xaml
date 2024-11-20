@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:popupModelView="using:WalletApp.ViewModels.PopupModelView"
+               x:DataType="popupModelView:SimplePopupViewModel"
+               x:Class="WalletApp.Views.PopupViews.SimplePopupView"
+               Color="Transparent">
+
+    <VerticalStackLayout BackgroundColor="Transparent" Padding="32" HorizontalOptions="FillAndExpand" Spacing="12">
+        <Frame BackgroundColor="White" Padding="16" HorizontalOptions="FillAndExpand" CornerRadius="12">
+            <VerticalStackLayout Spacing="16">
+                <Label Style="{StaticResource Caption}" 
+                       Text="Информация" 
+                       TextColor="Black"
+                       FontSize="18"></Label>
+                <Label Style="{StaticResource Caption}" 
+                       Text="{Binding Message}" 
+                       TextColor="Black"
+                       FontSize="14"></Label>
+                
+                    <Button Text="Отписаться" BackgroundColor="#FD3D3D" WidthRequest="200"></Button>
+            </VerticalStackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</toolkit:Popup>
