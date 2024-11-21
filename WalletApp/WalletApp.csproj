@@ -21,7 +21,7 @@
         <Nullable>enable</Nullable>
 
         <!-- Display name -->
-        <ApplicationTitle>WalletApp</ApplicationTitle>
+        <ApplicationTitle>Мультибанк</ApplicationTitle>
 
         <!-- App Identifier -->
         <ApplicationId>com.devnullteam.walletapp</ApplicationId>

@@ -25,4 +25,9 @@ public partial class SubscriptionPage : ContentPage
     {
         await Shell.Current.GoToAsync("//MainPage");
     }
+
+    private void GoBack(object? sender, EventArgs e)
+    {
+        GoBack();
+    }
 }

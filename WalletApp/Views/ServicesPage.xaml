@@ -22,10 +22,11 @@
                                HorizontalOptions="Start"
                                Style="{StaticResource Avatar}"
                                WidthRequest="28" HeightRequest="28">
-                            <Image Source="btn_person.svg"
+                            <ImageButton Source="btn_back.svg"
                                    WidthRequest="28" HeightRequest="28"
                                    HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
+                                   VerticalOptions="Center"
+                                   Clicked="GoBack"/>
                         </Frame>
 
                         <!-- Поиск -->

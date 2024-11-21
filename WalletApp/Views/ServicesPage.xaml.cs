@@ -30,4 +30,9 @@ public partial class ServicesPage : ContentPage
     {
         await Shell.Current.GoToAsync("//Payment");
     }
+
+    private void GoBack(object? sender, EventArgs e)
+    {
+        GoBack();
+    }
 }

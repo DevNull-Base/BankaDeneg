@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui.Behaviors;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using WalletApp.ViewModels;
+using WalletApp.Views.PopupViews;
 
 namespace WalletApp;
 
@@ -43,4 +45,22 @@ public partial class MainPage : ContentPage
             ProgressBarGrid.Children.Add(boxView);
         }
     }
+    
+    protected override bool OnBackButtonPressed()
+    {
+        ShowConfirmationPopup();
+        return true;
+    }
+    
+    private async void ShowConfirmationPopup()
+    {
+        var popup = new ExitPopupView();
+        var result = await this.ShowPopupAsync(popup);
+
+        if (result is bool boolResult && boolResult)
+        {
+            App.Current.Quit();
+        }
+    }
+    
 }

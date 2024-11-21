@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Behaviors;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using WalletApp.ViewModels;
+using WalletApp.Views.PopupViews;
 
 namespace WalletApp.Views;
 
@@ -20,5 +22,22 @@ public partial class BudgetPage : ContentPage
         this.Behaviors.Add(item);
 
         BindingContext = new BudgetViewModel();
+    }
+    
+    protected override bool OnBackButtonPressed()
+    {
+        ShowConfirmationPopup();
+        return true;
+    }
+    
+    private async void ShowConfirmationPopup()
+    {
+        var popup = new ExitPopupView();
+        var result = await this.ShowPopupAsync(popup);
+
+        if (result is bool boolResult && boolResult)
+        {
+            App.Current.Quit();
+        }
     }
 }
