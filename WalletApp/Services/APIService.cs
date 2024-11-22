@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using SharedModels;
 
@@ -40,35 +41,50 @@ public class APIService : IAPIService
 
     private async Task<T> SendGetRequestAsync<T>(string url)
     {
-        var authToken = await _authService.GetAuthTokenAsync();
-        if (string.IsNullOrEmpty(authToken))
+        bool auth = await _authService.IsAuthenticatedAsync();
+        
+        if (!auth)
         {
-            throw new Exception("Authentication token is missing.");
+            await _authService.AuthenticateAsync();
         }
-
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-
-        var response = await _httpClient.GetAsync(url);
-        if (response.IsSuccessStatusCode)
+        
+        try
         {
-            var responseJson = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(responseJson);
-        }
-        else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-        {
-            var refreshSuccess = await _authService.RefreshTokenAsync();
-            if (refreshSuccess)
+            var authToken = await _authService.GetAuthTokenAsync();
+            if (string.IsNullOrEmpty(authToken))
             {
-                return await SendGetRequestAsync<T>(url);
+                throw new Exception("Authentication token is missing.");
+            }
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+            var response = await _httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseJson = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(responseJson);
+            }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                var refreshSuccess = await _authService.RefreshTokenAsync();
+                if (refreshSuccess)
+                {
+                    return await SendGetRequestAsync<T>(url);
+                }
+                else
+                {
+                    throw new Exception("Failed to refresh token.");
+                }
             }
             else
             {
-                throw new Exception("Failed to refresh token.");
+                throw new Exception($"Failed to get data from API. Status code: {response.StatusCode}");
             }
         }
-        else
+        catch (Exception e)
         {
-            throw new Exception($"Failed to get data from API. Status code: {response.StatusCode}");
+            Console.WriteLine(e);
+            throw;
         }
     }
 }

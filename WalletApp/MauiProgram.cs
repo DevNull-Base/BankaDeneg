@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using WalletApp.Services;
 using WalletApp.ViewModels;
 using WalletApp.ViewModels.PopupModelView;
+using WalletApp.Views;
 using WalletApp.Views.PopupViews;
 
 namespace WalletApp;
@@ -29,7 +30,12 @@ public static class MauiProgram
             .AddTransientPopup<SimplePopupView, SimplePopupViewModel>()
             .AddSingleton<IAuthService, AuthService>()
             .AddSingleton<IAPIService, APIService>()
-            .AddSingleton<IBiometricService, BiometricService>();
+            .AddSingleton<IDataService, DataService>()
+            .AddSingleton<IBiometricService, BiometricService>()
+            .AddSingleton<MainViewModel>()
+            .AddSingleton<MainPage>()
+            .AddSingleton<AccountViewModel>()
+            .AddSingleton<AccountPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

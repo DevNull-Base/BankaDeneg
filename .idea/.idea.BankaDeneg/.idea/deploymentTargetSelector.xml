@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="WalletApp">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-11-21T20:03:22.444064200Z">
+        <DropdownSelection timestamp="2024-11-22T17:18:26.256653300Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\GolubevVlad\.android\avd\Pixel_8_API_34.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=a89370d9" />
             </handle>
           </Target>
         </DropdownSelection>

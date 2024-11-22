@@ -13,14 +13,14 @@ namespace WalletApp.Views;
 
 public partial class AccountPage : ContentPage
 {
-    public AccountPage()
+    public AccountPage(AccountViewModel accountViewModel)
     {
         InitializeComponent();
         var item = new StatusBarBehavior();
         item.StatusBarStyle = StatusBarStyle.LightContent;
         this.Behaviors.Add(item);
 
-        BindingContext = new AccountViewModel();
+        BindingContext = accountViewModel;
     }
     
     protected override bool OnBackButtonPressed()

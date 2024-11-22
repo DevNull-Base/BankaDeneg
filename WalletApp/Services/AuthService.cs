@@ -1,12 +1,14 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 using Newtonsoft.Json;
 using SharedModels;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace WalletApp.Services;
 
 public interface IAuthService
 {
-    Task<bool> AuthenticateAsync(string login, string password);
+    Task<bool> AuthenticateAsync();
     Task<bool> RefreshTokenAsync();
     Task<string> GetAuthTokenAsync();
     Task<bool> IsAuthenticatedAsync();
@@ -29,9 +31,34 @@ public class AuthService : IAuthService
     {
         _httpClient = new HttpClient();
     }
-
-    public async Task<bool> AuthenticateAsync(string login, string password)
+    
+    private class Credentials
     {
+        public string Login { get; set; }
+        public string Password { get; set; }
+    }
+    
+    private (string Login, string Password) ReadCredentialsFromJson()
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        var resourceName = "WalletApp.credentials.json";
+
+        using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+        using (StreamReader reader = new StreamReader(stream))
+        {
+            string result = reader.ReadToEnd();
+            var credentials = JsonSerializer.Deserialize<Credentials>(result);
+            return (credentials.Login, credentials.Password);
+        }
+    }
+    
+
+    public async Task<bool> AuthenticateAsync()
+    {
+        var credentials = ReadCredentialsFromJson();
+        var login = credentials.Login;
+        var password = credentials.Password;
+        
         var authData = new { login, password };
         var json = JsonConvert.SerializeObject(authData);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -53,6 +80,8 @@ public class AuthService : IAuthService
 
     public async Task<bool> RefreshTokenAsync()
     {
+        await AuthenticateAsync();
+        return true;
         var refreshToken = await SecureStorage.GetAsync("RefreshToken");
         if (string.IsNullOrEmpty(refreshToken))
         {

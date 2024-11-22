@@ -8,7 +8,7 @@ namespace WalletApp;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage()
+    public MainPage(MainViewModel viewModel)
     {
         InitializeComponent();
         this.Behaviors.Add(new StatusBarBehavior
@@ -16,8 +16,6 @@ public partial class MainPage : ContentPage
             StatusBarColor = Colors.Transparent,
             StatusBarStyle = StatusBarStyle.LightContent
         });
-
-        var viewModel = new MainViewModel();
 
         BindingContext = viewModel;
 
