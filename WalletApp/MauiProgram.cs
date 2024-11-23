@@ -34,6 +34,8 @@ public static class MauiProgram
             .AddSingleton<IBiometricService, BiometricService>()
             .AddSingleton<MainViewModel>()
             .AddSingleton<MainPage>()
+            .AddSingleton<BudgetViewModel>()
+            .AddSingleton<BudgetPage>()
             .AddSingleton<AccountViewModel>()
             .AddSingleton<AccountPage>();
 

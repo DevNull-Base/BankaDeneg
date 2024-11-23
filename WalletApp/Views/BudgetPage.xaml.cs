@@ -13,7 +13,7 @@ namespace WalletApp.Views;
 
 public partial class BudgetPage : ContentPage
 {
-    public BudgetPage()
+    public BudgetPage(BudgetViewModel budgetViewModel)
     {
         InitializeComponent();
         var item = new StatusBarBehavior();
@@ -21,7 +21,7 @@ public partial class BudgetPage : ContentPage
         item.StatusBarColor = Colors.Transparent;
         this.Behaviors.Add(item);
 
-        BindingContext = new BudgetViewModel();
+        BindingContext = budgetViewModel;
     }
     
     protected override bool OnBackButtonPressed()
