@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
         this.Behaviors.Add(new StatusBarBehavior
         {
             StatusBarColor = Colors.Transparent,
-            StatusBarStyle = StatusBarStyle.LightContent
+            StatusBarStyle = StatusBarStyle.DarkContent
         });
 
         BindingContext = viewModel;

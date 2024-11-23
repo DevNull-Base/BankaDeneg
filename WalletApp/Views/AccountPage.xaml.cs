@@ -17,7 +17,7 @@ public partial class AccountPage : ContentPage
     {
         InitializeComponent();
         var item = new StatusBarBehavior();
-        item.StatusBarStyle = StatusBarStyle.LightContent;
+        item.StatusBarStyle = StatusBarStyle.DarkContent;
         this.Behaviors.Add(item);
 
         BindingContext = accountViewModel;

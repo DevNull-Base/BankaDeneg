@@ -17,7 +17,7 @@ public partial class PayingPage : ContentPage
     {
         InitializeComponent();
         var item = new StatusBarBehavior();
-        item.StatusBarStyle = StatusBarStyle.LightContent;
+        item.StatusBarStyle = StatusBarStyle.DarkContent;
         item.StatusBarColor = Colors.Transparent;
         this.Behaviors.Add(item);
 
